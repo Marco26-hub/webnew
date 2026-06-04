@@ -43,8 +43,12 @@ const inputClass =
   "w-full rounded-xl border border-line bg-surface/60 px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 placeholder:text-faint focus:border-accent/60 focus:bg-surface";
 
 export function ContactForm() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const f = t.contact.form;
+  const errSend =
+    lang === "it"
+      ? "Invio non riuscito. Riprova o scrivici via email."
+      : "Couldn't send. Try again, or email us directly.";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,6 +58,7 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sendError, setSendError] = useState(false);
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -66,11 +71,29 @@ export function ContactForm() {
 
   const onSubmit = async (ev: FormEvent) => {
     ev.preventDefault();
+    setSendError(false);
     if (!validate()) return;
     setStatus("submitting");
-    // Front-end demo only — wire this to your API / email provider.
-    await new Promise((r) => setTimeout(r, 1400));
-    setStatus("done");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          reason: t.contact.reasons[reasonIdx],
+          budget: t.contact.budgets[budgetIdx],
+          message,
+        }),
+      });
+      const json = await res.json().catch(() => ({ ok: false }));
+      if (!res.ok || !json.ok) throw new Error("send_failed");
+      setStatus("done");
+    } catch {
+      setStatus("idle");
+      setSendError(true);
+    }
   };
 
   return (
@@ -218,8 +241,15 @@ export function ContactForm() {
               />
             </Field>
 
-            <div className="flex items-center justify-between pt-1">
-              <p className="font-mono text-[0.7rem] text-faint">{f.avgReply}</p>
+            <div className="flex items-center justify-between gap-4 pt-1">
+              <p
+                className={cn(
+                  "font-mono text-[0.7rem]",
+                  sendError ? "text-warn" : "text-faint",
+                )}
+              >
+                {sendError ? errSend : f.avgReply}
+              </p>
               <Button
                 type="submit"
                 size="lg"

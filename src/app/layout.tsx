@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Instrument_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { site } from "@/lib/content";
 import { dictionaries, isLang, isTheme, type Lang, type Theme } from "@/lib/i18n";
@@ -11,6 +14,14 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
 
 const brand = dictionaries.en.brand;
 
@@ -52,7 +63,6 @@ export const viewport: Viewport = {
   ],
 };
 
-/** Resolve language + theme from cookies, falling back to Accept-Language. */
 async function resolvePrefs(): Promise<{ lang: Lang; theme: Theme }> {
   const cookieStore = await cookies();
   const cookieLang = cookieStore.get("lang")?.value;
@@ -78,9 +88,9 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${GeistSans.variable} ${GeistMono.variable}${
-        theme === "light" ? " light" : ""
-      }`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${
+        instrumentSerif.variable
+      }${theme === "light" ? " light" : ""}`}
       suppressHydrationWarning
     >
       <body className="antialiased">
@@ -93,6 +103,8 @@ export default async function RootLayout({
           </SmoothScroll>
           <CustomCursor />
         </AppProviders>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
