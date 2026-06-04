@@ -7,8 +7,11 @@ import {
   useTransform,
   type MotionValue,
 } from "framer-motion";
-import { capabilities } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
+import type { Dict } from "@/lib/i18n";
 import { clamp, lerp, pad } from "@/lib/utils";
+
+type Cap = Dict["capabilities"]["items"][number];
 
 const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -24,7 +27,7 @@ function OrbitNode({
   index: number;
   total: number;
   scale: number;
-  cap: (typeof capabilities)[number];
+  cap: Cap;
 }) {
   const baseAngle = (index / total) * Math.PI * 2 - Math.PI / 2;
   const orbitR = 250 + index * 14;
@@ -46,6 +49,7 @@ function OrbitNode({
   });
   const settle = useTransform(progress, [0.55, 1], [0, 1]);
   const cardOpacity = useTransform(progress, [0.5, 0.92], [0.55, 1]);
+  const cardWidth = useTransform(settle, [0, 1], [180 * scale, 320]);
 
   return (
     <motion.div
@@ -53,7 +57,7 @@ function OrbitNode({
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
     >
       <motion.div
-        style={{ width: useTransform(settle, [0, 1], [180 * scale, 320]) }}
+        style={{ width: cardWidth }}
         className="panel rounded-2xl p-4 backdrop-blur-sm"
       >
         <div className="flex items-center gap-3">
@@ -74,15 +78,13 @@ function OrbitNode({
   );
 }
 
-/**
- * Scroll choreography: four capability nodes orbit a glowing core, then
- * recompose into an ordered roster as the section scrolls. The elements don't
- * just appear — they travel with intent.
- */
 export function CapabilitiesOrbit() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+
+  const items = t.capabilities.items;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -109,16 +111,14 @@ export function CapabilitiesOrbit() {
         ref={stageRef}
         className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden"
       >
-        {/* heading */}
         <div className="shell pointer-events-none absolute top-0 left-0 right-0 z-20 pt-[12vh]">
-          <p className="eyebrow">What we do</p>
+          <p className="eyebrow">{t.capabilities.eyebrow}</p>
           <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-6xl">
-            Four disciplines,
-            <span className="text-muted"> one system.</span>
+            {t.capabilities.titleA}
+            <span className="text-muted"> {t.capabilities.titleB}</span>
           </h2>
         </div>
 
-        {/* orbit rings */}
         <motion.svg
           style={{ opacity: ringOpacity }}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -140,7 +140,6 @@ export function CapabilitiesOrbit() {
           ))}
         </motion.svg>
 
-        {/* core */}
         <motion.div
           style={{ x: coreX, scale: corePulse }}
           className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
@@ -149,19 +148,18 @@ export function CapabilitiesOrbit() {
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(63,220,255,0.45),transparent_70%)] blur-md" />
             <div className="glass relative grid h-24 w-24 place-items-center rounded-full border border-line-bright">
               <span className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-accent">
-                core
+                {t.capabilities.core}
               </span>
             </div>
           </div>
         </motion.div>
 
-        {/* orbiting nodes */}
-        {capabilities.map((cap, i) => (
+        {items.map((cap, i) => (
           <OrbitNode
             key={cap.id}
             progress={scrollYProgress}
             index={i}
-            total={capabilities.length}
+            total={items.length}
             scale={scale}
             cap={cap}
           />

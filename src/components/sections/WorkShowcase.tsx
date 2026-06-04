@@ -1,30 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { projects } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 import { HorizontalScroll } from "@/components/scroll/HorizontalScroll";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ArrowRight } from "@/components/ui/Icons";
 
 export function WorkShowcase() {
+  const { t } = useI18n();
+
   return (
     <HorizontalScroll
       className="bg-base"
       intro={
         <div className="shell mb-10 flex items-end justify-between md:mb-14">
           <div>
-            <p className="eyebrow">Selected work</p>
+            <p className="eyebrow">{t.work.eyebrow}</p>
             <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
-              Proof, not promises.
+              {t.work.heading}
             </h2>
           </div>
           <p className="hidden max-w-xs text-sm leading-relaxed text-muted md:block">
-            Systems in production today — scroll sideways to move through them.
+            {t.work.note}
           </p>
         </div>
       }
     >
-      {projects.map((project, i) => (
+      {t.work.items.map((project, i) => (
         <ProjectCard
           key={project.slug}
           project={project}
@@ -41,7 +43,7 @@ export function WorkShowcase() {
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-line-bright transition-transform duration-300 group-hover:translate-x-1">
               <ArrowRight className="h-5 w-5 text-accent" />
             </div>
-            <p className="mt-4 text-lg font-medium">View all work</p>
+            <p className="mt-4 text-lg font-medium">{t.work.viewAll}</p>
           </div>
         </div>
       </Link>

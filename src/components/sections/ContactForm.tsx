@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { budgets, contactReasons } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
@@ -43,20 +43,23 @@ const inputClass =
   "w-full rounded-xl border border-line bg-surface/60 px-4 py-3 text-sm text-ink outline-none transition-colors duration-300 placeholder:text-faint focus:border-accent/60 focus:bg-surface";
 
 export function ContactForm() {
+  const { t } = useI18n();
+  const f = t.contact.form;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
-  const [reason, setReason] = useState(contactReasons[0]);
-  const [budget, setBudget] = useState(budgets[1]);
+  const [reasonIdx, setReasonIdx] = useState(0);
+  const [budgetIdx, setBudgetIdx] = useState(1);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!name.trim()) e.name = "required";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "invalid";
-    if (message.trim().length < 10) e.message = "add detail";
+    if (!name.trim()) e.name = f.errRequired;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = f.errInvalid;
+    if (message.trim().length < 10) e.message = f.errDetail;
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -104,11 +107,10 @@ export function ContactForm() {
               </svg>
             </motion.div>
             <h3 className="mt-6 text-2xl font-semibold tracking-tight">
-              Message received.
+              {f.successTitle}
             </h3>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
-              Thanks, {name.split(" ")[0] || "there"}. We read every note and
-              reply within two working days.
+              {f.successHi}, {name.split(" ")[0] || "there"} — {f.successBody}
             </p>
             <button
               onClick={() => {
@@ -120,7 +122,7 @@ export function ContactForm() {
               }}
               className="mt-7 text-sm text-accent transition-opacity hover:opacity-70"
             >
-              Send another →
+              {f.sendAnother}
             </button>
           </motion.div>
         ) : (
@@ -134,28 +136,28 @@ export function ContactForm() {
             noValidate
           >
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field label="Name" error={errors.name}>
+              <Field label={f.name} error={errors.name}>
                 <input
                   className={inputClass}
-                  placeholder="Ada Lovelace"
+                  placeholder={f.namePh}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </Field>
-              <Field label="Email" error={errors.email}>
+              <Field label={f.email} error={errors.email}>
                 <input
                   className={inputClass}
-                  placeholder="you@company.com"
+                  placeholder={f.emailPh}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Field>
             </div>
 
-            <Field label="Company">
+            <Field label={f.company}>
               <input
                 className={inputClass}
-                placeholder="Where you work"
+                placeholder={f.companyPh}
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
               />
@@ -163,17 +165,17 @@ export function ContactForm() {
 
             <div>
               <span className="mb-2 block text-xs font-medium text-muted">
-                Reason
+                {f.reason}
               </span>
               <div className="flex flex-wrap gap-2">
-                {contactReasons.map((r) => (
+                {t.contact.reasons.map((r, i) => (
                   <button
                     key={r}
                     type="button"
-                    onClick={() => setReason(r)}
+                    onClick={() => setReasonIdx(i)}
                     className={cn(
                       "rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-200",
-                      reason === r
+                      reasonIdx === i
                         ? "border-accent/60 bg-accent/10 text-ink"
                         : "border-line text-muted hover:text-ink",
                     )}
@@ -186,17 +188,17 @@ export function ContactForm() {
 
             <div>
               <span className="mb-2 block text-xs font-medium text-muted">
-                Budget
+                {f.budget}
               </span>
               <div className="flex flex-wrap gap-2">
-                {budgets.map((b) => (
+                {t.contact.budgets.map((b, i) => (
                   <button
                     key={b}
                     type="button"
-                    onClick={() => setBudget(b)}
+                    onClick={() => setBudgetIdx(i)}
                     className={cn(
                       "rounded-full border px-3.5 py-1.5 text-sm transition-colors duration-200",
-                      budget === b
+                      budgetIdx === i
                         ? "border-accent/60 bg-accent/10 text-ink"
                         : "border-line text-muted hover:text-ink",
                     )}
@@ -207,21 +209,24 @@ export function ContactForm() {
               </div>
             </div>
 
-            <Field label="Project" error={errors.message}>
+            <Field label={f.project} error={errors.message}>
               <textarea
                 className={cn(inputClass, "min-h-[7rem] resize-none")}
-                placeholder="What are you trying to build?"
+                placeholder={f.projectPh}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
             </Field>
 
             <div className="flex items-center justify-between pt-1">
-              <p className="font-mono text-[0.7rem] text-faint">
-                Avg. reply · 48h
-              </p>
-              <Button type="submit" size="lg" arrow disabled={status === "submitting"}>
-                {status === "submitting" ? "Sending…" : "Send message"}
+              <p className="font-mono text-[0.7rem] text-faint">{f.avgReply}</p>
+              <Button
+                type="submit"
+                size="lg"
+                arrow
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" ? f.sending : f.send}
               </Button>
             </div>
           </motion.form>

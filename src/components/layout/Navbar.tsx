@@ -9,14 +9,18 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import { nav, site } from "@/lib/content";
+import { site } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 import { cn } from "@/lib/utils";
 import { Logo, ArrowUpRight } from "@/components/ui/Icons";
 import { Button } from "@/components/ui/Button";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LangSwitch } from "@/components/ui/LangSwitch";
 
 export function Navbar() {
   const pathname = usePathname();
+  const { t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
@@ -58,7 +62,7 @@ export function Navbar() {
             </Link>
 
             <nav className="hidden items-center gap-1 md:flex">
-              {nav.map((item) => {
+              {t.nav.items.map((item) => {
                 const active = pathname === item.href;
                 return (
                   <Link
@@ -87,15 +91,17 @@ export function Navbar() {
             </nav>
 
             <div className="flex items-center gap-2">
-              <div className="hidden md:block">
+              <div className="hidden items-center gap-2 md:flex">
+                <LangSwitch />
+                <ThemeToggle />
                 <Button href="/contact" size="sm" arrow magnetic>
-                  Start a project
+                  {t.nav.cta}
                 </Button>
               </div>
               <Magnetic strength={0.25}>
                 <button
                   onClick={() => setOpen((v) => !v)}
-                  aria-label="Toggle menu"
+                  aria-label="Menu"
                   aria-expanded={open}
                   className="grid h-10 w-10 place-items-center rounded-full border border-line-bright md:hidden"
                 >
@@ -131,7 +137,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 grain bg-base/95 backdrop-blur-xl md:hidden"
           >
             <div className="shell flex h-full flex-col justify-center gap-2 pt-20">
-              {nav.map((item, i) => (
+              {t.nav.items.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, y: 30 }}
@@ -150,9 +156,13 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <div className="mt-8">
+              <div className="mt-8 flex items-center justify-between">
+                <LangSwitch />
+                <ThemeToggle />
+              </div>
+              <div className="mt-4">
                 <Button href="/contact" size="lg" arrow className="w-full">
-                  Start a project
+                  {t.nav.cta}
                 </Button>
               </div>
             </div>

@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import type { Project } from "@/lib/content";
+import type { Dict } from "@/lib/i18n";
 import { cn, pad } from "@/lib/utils";
 import { ArrowUpRight } from "./Icons";
+
+type Project = Dict["work"]["items"][number];
 
 /** Generative-looking preview tile (no image assets needed). */
 function Preview({ project }: { project: Project }) {

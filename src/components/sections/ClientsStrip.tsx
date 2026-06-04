@@ -1,15 +1,17 @@
 "use client";
 
 import { clients } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 import { Marquee } from "@/components/ui/Marquee";
 import { Spark } from "@/components/ui/Icons";
 
 export function ClientsStrip() {
+  const { t } = useI18n();
   return (
     <section className="relative border-y border-line bg-surface/40 py-10">
       <div className="shell mb-7">
         <p className="text-center font-mono text-[0.7rem] uppercase tracking-[0.3em] text-faint">
-          Trusted by teams shaping their categories
+          {t.clients.label}
         </p>
       </div>
       <Marquee duration={32} className="mask-fade-x">

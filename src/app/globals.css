@@ -68,6 +68,45 @@
     border-color: var(--color-line);
   }
 
+  /* Theme tokens. :root defaults (from @theme) are dark. `.light`
+     overrides them; `.dark` re-asserts dark so the cinematic sections
+     can stay dark even when the page is in light mode. */
+  :root {
+    color-scheme: dark;
+  }
+  .dark {
+    --color-base: #04060c;
+    --color-surface: #080c16;
+    --color-surface-2: #0b1120;
+    --color-elevated: #111a2e;
+    --color-line: #172135;
+    --color-line-bright: #25324f;
+    --color-ink: #eaf0fb;
+    --color-ink-inverse: #04060c;
+    --color-muted: #98a7c6;
+    --color-faint: #5a688a;
+    --color-accent: #3fdcff;
+    --color-accent-2: #5b8cff;
+    --color-accent-3: #8b6cff;
+    color-scheme: dark;
+  }
+  .light {
+    --color-base: #f5f7fc;
+    --color-surface: #ffffff;
+    --color-surface-2: #eef1f8;
+    --color-elevated: #ffffff;
+    --color-line: #e4e8f2;
+    --color-line-bright: #cdd6e7;
+    --color-ink: #0a0e1a;
+    --color-ink-inverse: #f5f7fc;
+    --color-muted: #51607c;
+    --color-faint: #8794ac;
+    --color-accent: #0a93ba;
+    --color-accent-2: #3f6fe6;
+    --color-accent-3: #6f4fe0;
+    color-scheme: light;
+  }
+
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: auto;

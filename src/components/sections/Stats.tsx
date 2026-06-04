@@ -1,14 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { stats } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 
 export function Stats() {
+  const { t } = useI18n();
+
   return (
     <section className="relative border-y border-line bg-surface/40 py-20 md:py-28">
       <div className="shell">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
-          {stats.map((s, i) => (
+          {t.stats.map((s, i) => (
             <motion.div
               key={s.label}
               initial={{ opacity: 0, y: 24 }}

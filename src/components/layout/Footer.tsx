@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { nav, site } from "@/lib/content";
+import { site } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 import { Button } from "@/components/ui/Button";
 import { ArrowUpRight } from "@/components/ui/Icons";
 
 export function Footer() {
+  const { t } = useI18n();
   const year = new Date().getFullYear();
 
   return (
@@ -15,14 +17,14 @@ export function Footer() {
         {/* CTA */}
         <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <p className="eyebrow">Let&apos;s build</p>
+            <p className="eyebrow">{t.footer.eyebrow}</p>
             <h2 className="mt-5 text-4xl font-semibold tracking-tight sm:text-6xl">
-              Have a problem worth
-              <span className="serif italic text-glow"> solving well?</span>
+              {t.footer.headingA}
+              <span className="serif italic text-glow"> {t.footer.headingB}</span>
             </h2>
           </div>
           <Button href="/contact" size="lg" arrow magnetic>
-            Start a project
+            {t.footer.cta}
           </Button>
         </div>
 
@@ -30,17 +32,19 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <p className="text-sm font-semibold">{site.name}</p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
-              {site.tagline}
+              {t.brand.tagline}
             </p>
-            <p className="mt-5 font-mono text-xs text-faint">{site.location}</p>
+            <p className="mt-5 font-mono text-xs text-faint">
+              {t.brand.location}
+            </p>
           </div>
 
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-faint">
-              Sitemap
+              {t.footer.sitemap}
             </p>
             <ul className="mt-4 space-y-2.5">
-              {nav.map((item) => (
+              {t.nav.items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -55,7 +59,7 @@ export function Footer() {
 
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-faint">
-              Social
+              {t.footer.social}
             </p>
             <ul className="mt-4 space-y-2.5">
               {site.social.map((s) => (
@@ -76,7 +80,7 @@ export function Footer() {
 
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-faint">
-              Contact
+              {t.footer.contact}
             </p>
             <a
               href={`mailto:${site.email}`}
@@ -103,7 +107,7 @@ export function Footer() {
 
       <div className="shell flex flex-col items-center justify-between gap-3 border-t border-line py-6 text-xs text-faint sm:flex-row">
         <p>
-          © {year} {site.name}. Applied intelligence studio.
+          © {year} {site.name}. {t.footer.rights}
         </p>
         <p className="font-mono">{site.domain}</p>
       </div>

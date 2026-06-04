@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { CinematicBackground } from "@/components/webgl/CinematicBackground";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 
 const line = {
   hidden: { y: "115%" },
@@ -23,6 +24,7 @@ const floats = [
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const { t } = useI18n();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -34,18 +36,15 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="grain relative flex min-h-screen flex-col justify-center overflow-hidden"
+      className="dark grain relative flex min-h-screen flex-col justify-center overflow-hidden bg-base"
     >
-      {/* WebGL cinematic background */}
       <motion.div style={{ scale }} className="absolute inset-0">
         <CinematicBackground className="absolute inset-0" />
       </motion.div>
 
-      {/* legibility gradients */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-base/70 via-base/20 to-base" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_45%,transparent_20%,var(--color-base)_95%)]" />
 
-      {/* floating capability chips */}
       {floats.map((f) => (
         <motion.div
           key={f.label}
@@ -65,7 +64,6 @@ export function Hero() {
         </motion.div>
       ))}
 
-      {/* content */}
       <motion.div style={{ y, opacity }} className="shell relative z-10 pt-24">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -78,7 +76,7 @@ export function Hero() {
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
           </span>
           <span className="font-mono text-[0.72rem] tracking-wide text-muted">
-            AI engineering studio · Booking 2026
+            {t.hero.badge}
           </span>
         </motion.div>
 
@@ -91,7 +89,7 @@ export function Hero() {
               animate="visible"
               className="block text-gradient"
             >
-              Frontier AI,
+              {t.hero.line1}
             </motion.span>
           </span>
           <span className="block overflow-hidden">
@@ -102,8 +100,8 @@ export function Hero() {
               animate="visible"
               className="block"
             >
-              <span className="serif italic text-glow">engineered</span>{" "}
-              <span className="text-gradient">to ship.</span>
+              <span className="serif italic text-glow">{t.hero.line2serif}</span>{" "}
+              <span className="text-gradient">{t.hero.line2rest}</span>
             </motion.span>
           </span>
         </h1>
@@ -114,9 +112,7 @@ export function Hero() {
           transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-muted"
         >
-          {site.name} designs, builds and deploys intelligent products — from
-          research to production — with a cinematic eye and an engineer&apos;s
-          rigor.
+          {site.name} {t.hero.sub}
         </motion.p>
 
         <motion.div
@@ -126,22 +122,21 @@ export function Hero() {
           className="mt-10 flex flex-wrap items-center gap-3"
         >
           <Button href="/contact" size="lg" arrow magnetic>
-            Start a project
+            {t.hero.ctaPrimary}
           </Button>
           <Button href="/work" size="lg" variant="secondary" magnetic>
-            See the work
+            {t.hero.ctaSecondary}
           </Button>
         </motion.div>
       </motion.div>
 
-      {/* scroll cue */}
       <motion.div
         style={{ opacity }}
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
       >
         <div className="flex flex-col items-center gap-2">
           <span className="font-mono text-[0.62rem] uppercase tracking-[0.3em] text-faint">
-            Scroll
+            {t.hero.scroll}
           </span>
           <div className="flex h-9 w-5 justify-center rounded-full border border-line-bright pt-1.5">
             <motion.span

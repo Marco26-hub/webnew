@@ -1,6 +1,6 @@
 "use client";
 
-import { testimonials } from "@/lib/content";
+import { useI18n } from "@/components/providers/AppProviders";
 import { Marquee } from "@/components/ui/Marquee";
 
 function QuoteCard({
@@ -34,18 +34,20 @@ function QuoteCard({
 }
 
 export function Testimonials() {
+  const { t } = useI18n();
+
   return (
     <section className="relative overflow-hidden py-28 md:py-36">
       <div className="shell mb-14">
-        <p className="eyebrow">Word of mouth</p>
+        <p className="eyebrow">{t.testimonials.eyebrow}</p>
         <h2 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">
-          The teams we build with
-          <span className="text-muted"> keep us close.</span>
+          {t.testimonials.headingA}
+          <span className="text-muted"> {t.testimonials.headingB}</span>
         </h2>
       </div>
       <Marquee duration={42} className="mask-fade-x" gap="1.5rem">
-        {testimonials.map((t) => (
-          <QuoteCard key={t.name} {...t} />
+        {t.testimonials.items.map((item) => (
+          <QuoteCard key={item.name} {...item} />
         ))}
       </Marquee>
     </section>

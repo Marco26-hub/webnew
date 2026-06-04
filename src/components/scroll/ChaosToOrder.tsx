@@ -7,12 +7,13 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
+import { useI18n } from "@/components/providers/AppProviders";
 import { clamp } from "@/lib/utils";
 
 type Particle = {
-  cx: number; // chaos anchor
+  cx: number;
   cy: number;
-  tx: number; // ordered target
+  tx: number;
   ty: number;
   phase: number;
   speed: number;
@@ -24,15 +25,12 @@ type Particle = {
 const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-const TOTAL_FRAMES = 180; // 12s @ 15fps — purely for the on-screen frame counter
+const TOTAL_FRAMES = 180; // 12s @ 15fps — for the on-screen frame counter
 
-/**
- * "Chaos → Order": a scroll-scrubbed particle sequence. Scroll progress is
- * mapped to an animation index (shown as a frame counter), so the viewer
- * controls the motion frame-by-frame — particles dissolve from noise into the
- * word ORDER and back. No video/asset needed; the sequence is generated live.
- */
 export function ChaosToOrder() {
+  const { t, lang } = useI18n();
+  const word = lang === "it" ? "ORDINE" : "ORDER";
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const progressRef = useRef(0);
@@ -42,7 +40,6 @@ export function ChaosToOrder() {
     offset: ["start start", "end end"],
   });
 
-  // remap so the assembly happens in the middle 70% of the pinned scroll
   const eased = useTransform(scrollYProgress, [0.1, 0.85], [0, 1], {
     clamp: true,
   });
@@ -73,12 +70,12 @@ export function ChaosToOrder() {
       off.height = h;
       const octx = off.getContext("2d");
       if (!octx) return [];
-      const fs = Math.min(w * 0.22, h * 0.62);
+      const fs = Math.min(w * 0.2, h * 0.62);
       octx.fillStyle = "#fff";
-      octx.font = `900 ${fs}px ${"Geist, Arial, sans-serif"}`;
+      octx.font = `900 ${fs}px Geist, Arial, sans-serif`;
       octx.textAlign = "center";
       octx.textBaseline = "middle";
-      octx.fillText("ORDER", w / 2, h / 2);
+      octx.fillText(word, w / 2, h / 2);
 
       const data = octx.getImageData(0, 0, w, h).data;
       const pts: { x: number; y: number }[] = [];
@@ -93,11 +90,11 @@ export function ChaosToOrder() {
 
     const seed = () => {
       const targets = buildTargets();
-      particles = targets.map((t) => ({
+      particles = targets.map((tp) => ({
         cx: Math.random() * w,
         cy: Math.random() * h,
-        tx: t.x,
-        ty: t.y,
+        tx: tp.x,
+        ty: tp.y,
         phase: Math.random() * Math.PI * 2,
         speed: 0.4 + Math.random() * 0.9,
         amp: 30 + Math.random() * 90,
@@ -126,19 +123,19 @@ export function ChaosToOrder() {
     ro.observe(canvas);
 
     let raf = 0;
-    let t = 0;
+    let time = 0;
     const render = () => {
       raf = requestAnimationFrame(render);
-      t += 0.016;
+      time += 0.016;
       const p = easeInOut(clamp(progressRef.current));
       ctx.clearRect(0, 0, w, h);
       ctx.globalCompositeOperation = "lighter";
 
       for (let i = 0; i < particles.length; i++) {
         const pt = particles[i];
-        // chaos: swirling drift around the anchor
-        const chaosX = pt.cx + Math.cos(t * pt.speed + pt.phase) * pt.amp;
-        const chaosY = pt.cy + Math.sin(t * pt.speed * 0.8 + pt.phase) * pt.amp;
+        const chaosX = pt.cx + Math.cos(time * pt.speed + pt.phase) * pt.amp;
+        const chaosY =
+          pt.cy + Math.sin(time * pt.speed * 0.8 + pt.phase) * pt.amp;
         const x = chaosX + (pt.tx - chaosX) * p;
         const y = chaosY + (pt.ty - chaosY) * p;
 
@@ -158,67 +155,62 @@ export function ChaosToOrder() {
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, []);
+  }, [word]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative"
+      className="dark relative"
       style={{ height: "320vh" }}
-      aria-label="Chaos to order — a scroll-controlled sequence"
+      aria-label={`${t.chaos.headingA} ${t.chaos.headingB}`}
     >
-      <div className="sticky top-0 grain h-screen w-full overflow-hidden">
-        {/* particle stage */}
+      <div className="sticky top-0 grain h-screen w-full overflow-hidden bg-base">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
-        {/* radial wash for depth */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,transparent_30%,var(--color-base)_92%)]" />
 
-        {/* HUD / caption */}
         <div className="shell pointer-events-none relative flex h-full flex-col justify-between py-12">
           <div className="flex items-start justify-between">
             <div className="max-w-sm">
-              <p className="eyebrow">Scroll-scrubbed sequence</p>
+              <p className="eyebrow">{t.chaos.eyebrow}</p>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                You control the motion. Scroll maps directly to the frame index
-                — chaos resolves into order, one frame at a time.
+                {t.chaos.caption}
               </p>
             </div>
             <div className="text-right font-mono text-xs text-faint">
               <div className="flex items-center gap-2">
                 <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                LIVE · 15 FPS
+                {t.chaos.live}
               </div>
               <motion.div className="mt-1 text-ink">
-                FRAME <motion.span>{frame}</motion.span> / {TOTAL_FRAMES}
+                {t.chaos.frame} <motion.span>{frame}</motion.span> /{" "}
+                {TOTAL_FRAMES}
               </motion.div>
             </div>
           </div>
 
-          {/* center word crossfade */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <motion.span
               style={{ opacity: chaosOpacity }}
               className="absolute font-mono text-[11px] uppercase tracking-[0.5em] text-faint"
             >
-              [ entropy ]
+              {t.chaos.entropy}
             </motion.span>
             <motion.span
               style={{ opacity: orderOpacity }}
               className="absolute -bottom-2 font-mono text-[11px] uppercase tracking-[0.5em] text-accent"
             >
-              [ resolved ]
+              {t.chaos.resolved}
             </motion.span>
           </div>
 
           <div className="flex items-end justify-between">
             <h2 className="max-w-xl text-balance text-3xl font-semibold tracking-tight sm:text-5xl">
-              From chaos,
-              <span className="serif italic text-glow"> structure.</span>
+              {t.chaos.headingA}
+              <span className="serif italic text-glow"> {t.chaos.headingB}</span>
             </h2>
             <p className="hidden max-w-[15rem] text-right text-xs leading-relaxed text-muted sm:block">
-              Every system we ship makes the same move: noise in, intentional
-              order out.
+              {t.chaos.note}
             </p>
           </div>
         </div>
