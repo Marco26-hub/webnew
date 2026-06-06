@@ -14,6 +14,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationLd, websiteLd } from "@/lib/structuredData";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -23,7 +25,8 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-const brand = dictionaries.en.brand;
+// Italian is the primary/canonical language for indexing (Phase A).
+const brand = dictionaries.it.brand;
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${site.domain}`),
@@ -33,12 +36,14 @@ export const metadata: Metadata = {
   },
   description: brand.description,
   keywords: [
-    "AI agency",
-    "AI engineering studio",
-    "applied machine learning",
-    "generative product design",
-    "LLM",
-    "agents",
+    "automazioni AI",
+    "AI automation agency",
+    "agenzia siti web",
+    "e-commerce AI",
+    "sistemi multi-agente",
+    "SEO GEO",
+    "lead generation",
+    "automazione social",
   ],
   authors: [{ name: site.name }],
   openGraph: {
@@ -47,6 +52,8 @@ export const metadata: Metadata = {
     description: brand.description,
     siteName: site.name,
     url: `https://${site.domain}`,
+    locale: "it_IT",
+    alternateLocale: ["en_US"],
   },
   twitter: {
     card: "summary_large_image",
@@ -63,17 +70,18 @@ export const viewport: Viewport = {
   ],
 };
 
+/** Italian is the default (primary) language; English browsers still auto-switch. */
 async function resolvePrefs(): Promise<{ lang: Lang; theme: Theme }> {
   const cookieStore = await cookies();
   const cookieLang = cookieStore.get("lang")?.value;
   const cookieTheme = cookieStore.get("theme")?.value;
 
-  let lang: Lang = "en";
+  let lang: Lang = "it";
   if (isLang(cookieLang)) {
     lang = cookieLang;
   } else {
     const accept = (await headers()).get("accept-language")?.toLowerCase() ?? "";
-    if (/\bit\b/.test(accept) || accept.startsWith("it")) lang = "it";
+    if (accept.startsWith("en") || /\ben\b/.test(accept)) lang = "en";
   }
 
   const theme: Theme = isTheme(cookieTheme) ? cookieTheme : "dark";
@@ -105,6 +113,8 @@ export default async function RootLayout({
         </AppProviders>
         <Analytics />
         <SpeedInsights />
+        <JsonLd data={organizationLd("it")} />
+        <JsonLd data={websiteLd("it")} />
       </body>
     </html>
   );

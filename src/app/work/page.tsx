@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { WorkScreen } from "@/components/screens/WorkScreen";
 
 export const metadata: Metadata = {
-  title: "Work",
+  title: "Lavori",
   description:
-    "Selected work from Aether — intelligent systems running in production today.",
+    "Esempi illustrativi di automazione AI, siti & e-commerce, social e crescita realizzati da Aether.",
 };
 
 export default function WorkPage() {

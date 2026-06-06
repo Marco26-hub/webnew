@@ -1,7 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 
 /* Long-form case-study content, keyed by project slug + language.
-   Kept separate from the marketing dictionary to keep both readable. */
+   These are illustrative examples representative of our work. */
 
 export type CaseStudy = {
   challenge: string;
@@ -21,6 +21,7 @@ export type CaseLabels = {
   category: string;
   year: string;
   impact: string;
+  illustrative: string;
 };
 
 export const caseLabels: Record<Lang, CaseLabels> = {
@@ -35,6 +36,7 @@ export const caseLabels: Record<Lang, CaseLabels> = {
     category: "Category",
     year: "Year",
     impact: "Impact",
+    illustrative: "Illustrative example",
   },
   it: {
     back: "Tutti i lavori",
@@ -47,102 +49,103 @@ export const caseLabels: Record<Lang, CaseLabels> = {
     category: "Categoria",
     year: "Anno",
     impact: "Impatto",
+    illustrative: "Esempio illustrativo",
   },
 };
 
 export const caseStudies: Record<Lang, Record<string, CaseStudy>> = {
   en: {
-    "northwind-copilot": {
+    "aurora-commerce": {
       challenge:
-        "Northwind's month-end close took nine days of manual reconciliation across a dozen ledgers, with variance commentary written by hand under deadline pressure — and no quick way to trace a number back to its source.",
+        "Aurora's small team couldn't keep product pages, recommendations and support running at the pace the store needed — content and replies were always behind.",
       approach:
-        "We built an agentic finance copilot that reconciles ledgers against source systems, flags anomalies with citations, and drafts variance commentary a controller can edit. Every figure is traceable; the agent refuses to state a number it can't cite.",
+        "We built an AI-automated storefront: on-brand product copy generated automatically, AI recommendations, and an automated support assistant — with a human approval step where it matters.",
       outcome:
-        "The close dropped from nine days to four hours, with a complete audit trail. The finance team now reviews exceptions instead of chasing them.",
-      stack: ["Tool-use agents", "RAG", "Postgres", "Evals", "Human-in-the-loop"],
+        "Conversion rose 34% and the catalogue stays fresh without a dedicated content team.",
+      stack: ["AI content", "Recommendations", "Support assistant", "Next.js", "Headless commerce"],
     },
-    "helios-vision": {
+    "pulse-social": {
       challenge:
-        "Defects were slipping past manual inspection on a high-speed line, reaching customers and triggering costly recalls. Adding inspectors didn't scale.",
+        "Pulse posted in bursts, then went quiet for weeks — and juggled five different tools to do it.",
       approach:
-        "We trained an edge vision model running under 30ms per frame, with a human-in-the-loop queue for low-confidence cases and continuous retraining from each correction.",
+        "We automated content drafting and scheduling across channels and built the whole workflow into a dashboard inside their own site — one place to plan, approve and publish.",
       outcome:
-        "Escaped defects fell 72%. Inspectors shifted from staring at every unit to adjudicating only the hard calls.",
-      stack: ["Computer vision", "Edge inference", "ONNX", "Active learning"],
+        "A consistent, always-on presence, with about 8 hours a week saved and nothing managed outside their own admin.",
+      stack: ["Social automation", "Scheduling", "Custom admin", "Content AI"],
     },
-    "quanta-search": {
+    "meridian-leadgen": {
       challenge:
-        "Ten million documents, strict per-user permissions, and a legal team that wouldn't accept an answer without a verifiable source.",
+        "Meridian's sales team spent more time hunting for prospects than talking to them — and the list was cold.",
       approach:
-        "We built a permission-aware retrieval platform with hybrid search, re-ranking and inline citations, gated by an eval harness that blocks any release that regresses on answer accuracy.",
+        "We built a lead-research engine that sources, enriches and qualifies prospects against their ideal profile, then drops a warm, prioritized list into the team's inbox daily.",
       outcome:
-        "Answer accuracy improved 3.1×, and every response is traceable to its source — signed off by legal.",
-      stack: ["Hybrid retrieval", "Re-ranking", "Citations", "RBAC", "Evals"],
+        "3.2× more qualified leads, and sales conversations that start warm instead of cold.",
+      stack: ["Lead research", "Enrichment", "Qualification agents", "CRM sync"],
     },
-    "vantage-forecast": {
+    "atlas-agents": {
       challenge:
-        "Classical demand models kept missing turning points driven by unstructured market signals that no spreadsheet could capture.",
+        "A lean operations team at Atlas was buried in quotes, data entry and follow-ups — the work scaled with revenue, the headcount couldn't.",
       approach:
-        "We blended classical time-series with LLM reasoning over market chatter, news and filings, fused into a single calibrated forecast with confidence intervals planners could trust.",
+        "We deployed coordinated AI agents that handle quoting, data entry and follow-ups end-to-end, escalating to a human only on exceptions.",
       outcome:
-        "Forecast precision rose 18.4%, giving planners earlier, more confident calls on inventory and pricing.",
-      stack: ["Time-series", "LLM reasoning", "Feature fusion", "Calibration"],
+        "Manual work dropped about 60%, and the team took on more volume without new hires.",
+      stack: ["Multi-agent system", "Tool use", "Workflow automation", "Guardrails"],
     },
-    "lumen-studio": {
+    "lumen-redesign": {
       challenge:
-        "A 12-person brand team couldn't keep up with content demand without diluting the brand or burning out.",
+        "Lumen's site looked dated and loaded slowly — and neither Google nor AI assistants surfaced it.",
       approach:
-        "We built a generative studio for on-brand image and copy, with guardrails, brand-token conditioning and a review flow that keeps a human firmly in control of what ships.",
+        "We rebuilt it on a fast, modern stack with SEO and GEO baked in: clean structure, schema.org data and an llms.txt so search engines and AI assistants both understand it.",
       outcome:
-        "Content velocity went up 20× while staying on-brand — the team now ships like one ten times its size.",
-      stack: ["Diffusion", "LLM copy", "Guardrails", "Brand tokens"],
+        "Organic traffic roughly doubled and the brand finally looks the part.",
+      stack: ["Next.js", "Redesign", "SEO", "GEO", "Core Web Vitals"],
     },
   },
   it: {
-    "northwind-copilot": {
+    "aurora-commerce": {
       challenge:
-        "La chiusura di fine mese di Northwind richiedeva nove giorni di riconciliazione manuale su una dozzina di mastrini, con i commenti agli scostamenti scritti a mano sotto pressione — e nessun modo rapido di risalire dal numero alla sua fonte.",
+        "Il piccolo team di Aurora non riusciva a tenere il passo con schede prodotto, raccomandazioni e supporto — contenuti e risposte erano sempre indietro.",
       approach:
-        "Abbiamo costruito un copilot finanziario agentico che riconcilia i mastrini con i sistemi sorgente, segnala le anomalie con citazioni e redige i commenti agli scostamenti che un controller può modificare. Ogni cifra è tracciabile; l'agent si rifiuta di indicare un numero che non può citare.",
+        "Abbiamo costruito uno storefront automatizzato con AI: copy prodotto on-brand generato in automatico, raccomandazioni AI e un assistente di supporto automatico — con un passaggio di approvazione umano dove conta.",
       outcome:
-        "La chiusura è passata da nove giorni a quattro ore, con un audit trail completo. Il team finance ora revisiona le eccezioni invece di rincorrerle.",
-      stack: ["Agent con tool-use", "RAG", "Postgres", "Eval", "Human-in-the-loop"],
+        "La conversione è salita del 34% e il catalogo resta aggiornato senza un team di contenuti dedicato.",
+      stack: ["Contenuti AI", "Raccomandazioni", "Assistente supporto", "Next.js", "Commerce headless"],
     },
-    "helios-vision": {
+    "pulse-social": {
       challenge:
-        "I difetti sfuggivano all'ispezione manuale su una linea ad alta velocità, arrivando ai clienti e causando richiami costosi. Aggiungere ispettori non era scalabile.",
+        "Pulse pubblicava a raffiche, poi spariva per settimane — e per farlo destreggiava cinque strumenti diversi.",
       approach:
-        "Abbiamo addestrato un modello di visione all'edge che gira in meno di 30ms per frame, con una coda human-in-the-loop per i casi a bassa confidenza e retraining continuo a partire da ogni correzione.",
+        "Abbiamo automatizzato stesura e programmazione dei contenuti su tutti i canali e costruito l'intero flusso in una dashboard dentro il loro sito — un solo posto per pianificare, approvare e pubblicare.",
       outcome:
-        "I difetti sfuggiti sono calati del 72%. Gli ispettori sono passati dal guardare ogni pezzo al decidere solo i casi difficili.",
-      stack: ["Computer vision", "Inferenza edge", "ONNX", "Active learning"],
+        "Una presenza costante e sempre attiva, con circa 8 ore a settimana risparmiate e nulla gestito fuori dalla loro admin.",
+      stack: ["Automazione social", "Programmazione", "Admin su misura", "Contenuti AI"],
     },
-    "quanta-search": {
+    "meridian-leadgen": {
       challenge:
-        "Dieci milioni di documenti, permessi rigorosi per utente e un team legale che non accettava una risposta senza una fonte verificabile.",
+        "Il team vendite di Meridian passava più tempo a cercare contatti che a parlarci — e la lista era fredda.",
       approach:
-        "Abbiamo costruito una piattaforma di retrieval consapevole dei permessi con ricerca ibrida, re-ranking e citazioni inline, presidiata da una suite di eval che blocca ogni rilascio che peggiora l'accuratezza delle risposte.",
+        "Abbiamo costruito un motore di ricerca lead che trova, arricchisce e qualifica i contatti rispetto al profilo ideale, e ogni giorno consegna una lista calda e prioritizzata nella inbox del team.",
       outcome:
-        "L'accuratezza delle risposte è migliorata di 3,1× e ogni risposta è tracciabile alla sua fonte — approvata dal legale.",
-      stack: ["Retrieval ibrido", "Re-ranking", "Citazioni", "RBAC", "Eval"],
+        "3,2× lead qualificati in più, e conversazioni di vendita che partono calde invece che fredde.",
+      stack: ["Ricerca lead", "Arricchimento", "Agenti di qualifica", "Sync CRM"],
     },
-    "vantage-forecast": {
+    "atlas-agents": {
       challenge:
-        "I modelli di domanda classici continuavano a mancare i punti di svolta guidati da segnali di mercato non strutturati che nessun foglio di calcolo poteva catturare.",
+        "Il team operativo snello di Atlas era sommerso da preventivi, inserimento dati e follow-up — il lavoro cresceva con i ricavi, le persone no.",
       approach:
-        "Abbiamo fuso le serie storiche classiche con il ragionamento LLM su chiacchiericcio di mercato, notizie e bilanci, in un'unica previsione calibrata con intervalli di confidenza affidabili per i pianificatori.",
+        "Abbiamo messo in campo agenti AI coordinati che gestiscono preventivi, inserimento dati e follow-up end-to-end, passando a un umano solo sulle eccezioni.",
       outcome:
-        "La precisione delle previsioni è salita del 18,4%, dando ai pianificatori decisioni più tempestive e sicure su scorte e prezzi.",
-      stack: ["Serie storiche", "Ragionamento LLM", "Feature fusion", "Calibrazione"],
+        "Il lavoro manuale è calato di circa il 60% e il team ha gestito più volume senza nuove assunzioni.",
+      stack: ["Sistema multi-agente", "Tool use", "Automazione flussi", "Guardrail"],
     },
-    "lumen-studio": {
+    "lumen-redesign": {
       challenge:
-        "Un team di brand di 12 persone non riusciva a stare al passo con la domanda di contenuti senza diluire il brand o esaurirsi.",
+        "Il sito di Lumen sembrava datato e caricava lentamente — e né Google né gli assistenti AI lo facevano emergere.",
       approach:
-        "Abbiamo costruito uno studio generativo per immagini e testi on-brand, con guardrail, condizionamento sui brand-token e un flusso di revisione che tiene saldamente una persona al controllo di ciò che esce.",
+        "Lo abbiamo ricostruito su uno stack moderno e veloce con SEO e GEO integrate: struttura pulita, dati schema.org e un llms.txt perché motori di ricerca e assistenti AI lo capiscano entrambi.",
       outcome:
-        "La velocità dei contenuti è aumentata di 20× restando on-brand — il team ora produce come uno dieci volte più grande.",
-      stack: ["Diffusion", "Copy LLM", "Guardrail", "Brand token"],
+        "Il traffico organico è circa raddoppiato e il brand è finalmente all'altezza.",
+      stack: ["Next.js", "Redesign", "SEO", "GEO", "Core Web Vitals"],
     },
   },
 };

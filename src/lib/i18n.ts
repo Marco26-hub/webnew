@@ -12,9 +12,9 @@ export type Theme = "dark" | "light";
 
 const en = {
   brand: {
-    tagline: "Applied intelligence for ambitious teams.",
+    tagline: "AI automation, websites and growth — done for you.",
     description:
-      "Aether is an AI engineering studio. We design, build and ship intelligent products — from research to production — with a cinematic eye and an engineer's rigor.",
+      "Aether is an AI studio. We build automations and multi-agent systems, design websites and e-commerce, and run growth — SEO/GEO, lead research and social automation — for small businesses and enterprise teams.",
     location: "Milan · New York · Remote",
   },
   nav: {
@@ -27,23 +27,23 @@ const en = {
     cta: "Start a project",
   },
   hero: {
-    badge: "AI engineering studio · Booking 2026",
-    line1: "Frontier AI,",
-    line2serif: "engineered",
-    line2rest: "to ship.",
-    sub: "designs, builds and deploys intelligent products — from research to production — with a cinematic eye and an engineer's rigor.",
+    badge: "AI studio · Automation, web & growth",
+    line1: "We put AI",
+    line2serif: "to work",
+    line2rest: "for your business.",
+    sub: "builds AI automations, websites & e-commerce, multi-agent systems and growth — SEO/GEO, leads and social — for small businesses and enterprise teams.",
     ctaPrimary: "Start a project",
-    ctaSecondary: "See the work",
+    ctaSecondary: "Explore services",
     scroll: "Scroll",
   },
-  clients: { label: "Trusted by teams shaping their categories" },
+  clients: { label: "Trusted by teams who'd rather automate it" },
   manifesto: {
     eyebrow: "Our thesis",
     lines: [
-      "Intelligence is not a feature you bolt on.",
-      "It is a material — and like any material, it has a grain.",
-      "We work with that grain: probabilistic, evaluable, alive.",
-      "The result should feel intentional, never generic.",
+      "Most teams don't need more software.",
+      "They need the busywork to disappear.",
+      "So we automate it — and build the site and pipeline around it.",
+      "Quietly, reliably, on brand.",
     ],
   },
   chaos: {
@@ -58,70 +58,124 @@ const en = {
     headingB: "structure.",
     note: "Every system we ship makes the same move: noise in, intentional order out.",
   },
-  capabilities: {
+  pillars: {
     eyebrow: "What we do",
-    titleA: "Four disciplines,",
-    titleB: "one system.",
+    titleA: "Four pillars,",
+    titleB: "one growth engine.",
     core: "core",
     items: [
       {
-        id: "strategy",
+        id: "automation",
         index: 1,
-        title: "AI Strategy & Research",
+        title: "AI Automation & Agents",
         summary:
-          "We turn ambiguous ambition into a sequenced, fundable roadmap of intelligent systems.",
+          "We hand the repetitive work to AI — agents and automations that run your operations 24/7.",
         detail:
-          "Opportunity mapping, model feasibility, data audits and a build sequence your board can sign off on. We de-risk the unknowns before a line of production code is written.",
-        deliverables: [
-          "Opportunity & ROI model",
-          "Data & feasibility audit",
-          "Evaluation framework",
-          "Build roadmap",
+          "From single-task automations to multi-agent systems that reason, use your tools and act, we remove the manual work that slows your team down — observable and under control.",
+        services: [
+          {
+            id: "automations",
+            title: "Custom AI automations",
+            outcome: "Hours back every week",
+            blurb:
+              "We automate the repetitive workflows draining your team — data, docs, ops, follow-ups.",
+          },
+          {
+            id: "multiagent",
+            title: "Multi-agent systems",
+            outcome: "Work that runs itself",
+            blurb:
+              "Coordinated AI agents that reason, use your tools and complete real tasks end-to-end.",
+          },
+          {
+            id: "apps",
+            title: "Automation apps for SMBs",
+            outcome: "Your own AI tool",
+            blurb:
+              "Lightweight internal apps that put automation in your team's hands, built for small businesses.",
+          },
         ],
       },
       {
-        id: "product",
+        id: "web",
         index: 2,
-        title: "Generative Product Design",
+        title: "Websites & E-commerce",
         summary:
-          "Interfaces for probabilistic systems — designed so people trust the machine.",
+          "Sites that look premium and sell — from a sharp landing page to an AI-automated store.",
         detail:
-          "We design the moments where humans meet models: streaming, citations, undo, guardrails and the choreography that makes intelligence feel intentional rather than magical.",
-        deliverables: [
-          "Design language & tokens",
-          "Generative UI patterns",
-          "Prototype in code",
-          "Motion & interaction spec",
+          "We design and build fast, conversion-focused websites: landing pages, full e-commerce, and AI-automated sites where content, support and merchandising run themselves.",
+        services: [
+          {
+            id: "sites",
+            title: "Websites & e-commerce",
+            outcome: "From landing to store",
+            blurb:
+              "Landing pages, marketing sites and e-commerce — fast, premium, built to convert.",
+          },
+          {
+            id: "ai-sites",
+            title: "AI-automated sites",
+            outcome: "A site that runs itself",
+            blurb:
+              "Content, chat, support and merchandising powered by AI — your site works while you sleep.",
+          },
+          {
+            id: "redesign",
+            title: "Redesign",
+            outcome: "A second first impression",
+            blurb:
+              "We rebuild dated sites into fast, modern, on-brand experiences that perform.",
+          },
         ],
       },
       {
-        id: "engineering",
+        id: "social",
         index: 3,
-        title: "Applied ML Engineering",
+        title: "Social, automated",
         summary:
-          "Production pipelines: retrieval, fine-tuning, agents and evals that don't drift.",
+          "Show up consistently on social — and run it all from your own site's admin.",
         detail:
-          "From RAG and tool-use agents to fine-tuned models and real-time inference, we build the systems that hold up under load — observable, evaluable and cost-aware.",
-        deliverables: [
-          "Retrieval & agent systems",
-          "Fine-tuning & distillation",
-          "Eval & guardrail suite",
-          "Inference infrastructure",
+          "We automate content, scheduling and replies, and give you a dashboard inside your own site to manage every channel — no scattered tools, no missed weeks.",
+        services: [
+          {
+            id: "social-automation",
+            title: "Social automation",
+            outcome: "Always-on presence",
+            blurb:
+              "Automated content, scheduling and engagement that keep your brand consistently visible.",
+          },
+          {
+            id: "social-admin",
+            title: "Manage social from your site",
+            outcome: "One admin, every channel",
+            blurb:
+              "A dashboard built into your own site to plan, publish and monitor all your social — in one place.",
+          },
         ],
       },
       {
-        id: "platform",
+        id: "growth",
         index: 4,
-        title: "Platform & Scale",
+        title: "Visibility & Growth",
         summary:
-          "The infrastructure, observability and governance to run AI like an adult.",
+          "Get found — by Google and by AI — and turn attention into qualified leads.",
         detail:
-          "Cost controls, tracing, red-teaming, model routing and the operational scaffolding that turns a clever demo into a dependable platform your enterprise can stand on.",
-        deliverables: [
-          "Model routing & gateway",
-          "Observability & tracing",
-          "Governance & red-teaming",
-          "Managed deployment",
+          "SEO and GEO so you're cited by search engines and AI assistants alike, plus lead research that fills your pipeline with the right prospects.",
+        services: [
+          {
+            id: "seo-geo",
+            title: "SEO & GEO",
+            outcome: "Found by Google and AI",
+            blurb:
+              "Classic SEO plus Generative Engine Optimization — structured so ChatGPT, Perplexity and Google cite you.",
+          },
+          {
+            id: "leadgen",
+            title: "Lead research",
+            outcome: "A fuller pipeline",
+            blurb:
+              "We find and qualify the right prospects, so your sales starts from a warm list — not a cold one.",
+          },
         ],
       },
     ],
@@ -129,81 +183,81 @@ const en = {
   work: {
     eyebrow: "Selected work",
     heading: "Proof, not promises.",
-    note: "Systems in production today — scroll sideways to move through them.",
+    note: "Illustrative examples of what we build — scroll sideways to move through them.",
     viewAll: "View all work",
     headerEyebrow: "Selected work",
-    headerTitle: "Systems in production, not slideware.",
+    headerTitle: "What we build, in practice.",
     headerDesc:
-      "A sample of what we've shipped. Every engagement leaves a measurable mark — and a team better equipped to keep going.",
-    meta: ["40+ products shipped", "6 industries", "2019 — present"],
+      "Illustrative examples across automation, web, social and growth — representative of the work we do.",
+    meta: ["Automation · Web · Growth", "SMB & enterprise", "2024 — present"],
     items: [
       {
-        slug: "northwind-copilot",
-        client: "Northwind",
-        title: "An agent that closes the books",
-        category: "Agentic Systems",
+        slug: "aurora-commerce",
+        client: "Aurora",
+        title: "An e-commerce that merchandises itself",
+        category: "AI E-commerce",
         year: "2025",
         blurb:
-          "A finance copilot that reconciles ledgers, drafts variance commentary and never hallucinates a number it can't cite.",
-        metric: "9 days → 4 hrs",
-        metricLabel: "monthly close",
+          "An AI-automated store: product copy, recommendations and support that run without a dedicated content team.",
+        metric: "+34%",
+        metricLabel: "conversion rate",
         accent: "from-[#3fdcff] to-[#5b8cff]",
       },
       {
-        slug: "helios-vision",
-        client: "Helios",
-        title: "Seeing defects before they ship",
-        category: "Computer Vision",
+        slug: "pulse-social",
+        client: "Pulse",
+        title: "Social on autopilot, on brand",
+        category: "Social Automation",
         year: "2025",
         blurb:
-          "Real-time defect detection on the line, running at the edge with sub-30ms latency and human-in-the-loop review.",
-        metric: "−72%",
-        metricLabel: "escaped defects",
+          "Automated content and scheduling across channels, managed from the client's own site admin.",
+        metric: "8 hrs/wk",
+        metricLabel: "saved on social",
         accent: "from-[#5b8cff] to-[#8b6cff]",
       },
       {
-        slug: "quanta-search",
-        client: "Quanta",
-        title: "Search that actually understands",
-        category: "Retrieval",
-        year: "2024",
+        slug: "meridian-leadgen",
+        client: "Meridian",
+        title: "A pipeline that fills itself",
+        category: "Lead Generation",
+        year: "2025",
         blurb:
-          "A retrieval platform over ten million documents with citations, permissions and answers your lawyers approve of.",
-        metric: "3.1×",
-        metricLabel: "answer accuracy",
+          "A lead-research engine that finds, enriches and qualifies prospects straight into the sales team's inbox.",
+        metric: "3.2×",
+        metricLabel: "qualified leads",
         accent: "from-[#4fe3b0] to-[#3fdcff]",
       },
       {
-        slug: "vantage-forecast",
-        client: "Vantage",
-        title: "Forecasting the unforecastable",
-        category: "Applied ML",
+        slug: "atlas-agents",
+        client: "Atlas",
+        title: "Multi-agent ops for a lean team",
+        category: "Multi-agent Automation",
         year: "2024",
         blurb:
-          "A demand model blending classical signals and LLM reasoning over unstructured market chatter.",
-        metric: "+18.4%",
-        metricLabel: "forecast precision",
+          "Coordinated agents handling quotes, data entry and follow-ups end-to-end for a small operations team.",
+        metric: "−60%",
+        metricLabel: "manual work",
         accent: "from-[#8b6cff] to-[#5b8cff]",
       },
       {
-        slug: "lumen-studio",
+        slug: "lumen-redesign",
         client: "Lumen",
-        title: "A generative brand studio",
-        category: "Generative Media",
-        year: "2025",
+        title: "A redesign that paid for itself",
+        category: "Website Redesign",
+        year: "2024",
         blurb:
-          "On-brand image and copy generation with guardrails, so a 12-person team ships like a 100-person one.",
-        metric: "20×",
-        metricLabel: "content velocity",
+          "A dated site rebuilt into a fast, modern, SEO/GEO-ready experience — visibility and conversions up.",
+        metric: "2.1×",
+        metricLabel: "organic traffic",
         accent: "from-[#3fdcff] to-[#4fe3b0]",
       },
     ],
   },
   particle: {
     eyebrow: "Live WebGL · interactive depth",
-    headingA: "Depth you can",
-    headingB: "touch.",
-    copy: "Thousands of points, rendered in real time. Move your cursor — the field parts around it. This is the same fidelity we bring to every interface.",
+    headingA: "Craft you can",
+    headingB: "feel.",
+    copy: "Thousands of points, rendered in real time. Move your cursor — the field parts around it. The same care goes into everything we ship.",
     hint: "↖ move your cursor",
   },
   process: {
@@ -211,27 +265,27 @@ const en = {
     titleA: "A method,",
     titleB: "not a gamble.",
     intro:
-      "Four phases that turn a clever idea into a dependable system — and leave your team faster than we found it.",
+      "Four phases that turn an idea into a dependable system — and leave your team faster than we found it.",
     steps: [
       {
         phase: "01",
         title: "Immersion",
-        body: "Two weeks inside your problem. We map data, constraints and the shape of value before proposing anything.",
+        body: "We map your workflows, data and goals before proposing anything. We find the work worth automating first.",
       },
       {
         phase: "02",
         title: "Prototype",
-        body: "A working, evaluable prototype in code — not slides. We prove the model earns its place.",
+        body: "A working prototype in days — not slides. You see the automation, site or agent doing the real job early.",
       },
       {
         phase: "03",
-        title: "Productionize",
-        body: "We harden the system: evals, guardrails, observability and the infrastructure to scale it safely.",
+        title: "Ship",
+        body: "We productionize it: reliable, observable, on brand, and connected to the rest of your stack.",
       },
       {
         phase: "04",
         title: "Compound",
-        body: "We embed with your team so the capability — and the advantage — keeps compounding after we leave.",
+        body: "We tune and extend, so the time saved — and the growth — keeps compounding after launch.",
       },
     ],
   },
@@ -242,83 +296,114 @@ const en = {
     items: [
       {
         quote:
-          "Aether shipped in ten weeks what our internal team had circled for a year. The difference was rigor — they evaluated everything.",
-        name: "Elena Markov",
-        role: "Chief Product Officer, Northwind",
+          "Aether automated the work that used to eat our evenings. The store basically runs itself now.",
+        name: "Elena Conti",
+        role: "Founder, Aurora",
       },
       {
         quote:
-          "They treat models like engineering, not magic. The system has run in production for eight months without a single silent failure.",
-        name: "David Osei",
-        role: "VP Engineering, Helios",
+          "Our social went from sporadic to always-on — and we manage it all from our own dashboard.",
+        name: "David Hsu",
+        role: "Marketing Lead, Pulse",
       },
       {
         quote:
-          "The most senior team we've worked with. They made our AI feel inevitable instead of bolted-on.",
-        name: "Priya Nair",
-        role: "Founder & CEO, Quanta",
+          "The lead engine fills our pipeline with the right people. Sales finally starts warm.",
+        name: "Priya Shah",
+        role: "Head of Growth, Meridian",
       },
     ],
   },
   stats: [
-    { value: "12×", label: "median speed-up shipping models to production" },
-    { value: "$240M", label: "enterprise value influenced by our systems" },
-    { value: "40+", label: "intelligent products designed & deployed" },
-    { value: "99.98%", label: "inference uptime across managed deployments" },
+    { value: "10+ hrs", label: "saved per week, per automated workflow" },
+    { value: "+34%", label: "median conversion lift on sites we rebuild" },
+    { value: "3.2×", label: "more qualified leads from automated research" },
+    { value: "24/7", label: "agents and automations running your operations" },
   ],
+  faq: {
+    eyebrow: "FAQ",
+    titleA: "Questions,",
+    titleB: "answered.",
+    items: [
+      {
+        q: "What does Aether actually do?",
+        a: "We build AI automations and multi-agent systems, design websites and e-commerce, and run growth — SEO/GEO, lead research and social automation — for small businesses and enterprise teams.",
+      },
+      {
+        q: "Do you work with small businesses?",
+        a: "Yes. A lot of our work is automation apps and AI-automated sites sized for small teams, with pricing and scope to match.",
+      },
+      {
+        q: "What is GEO (Generative Engine Optimization)?",
+        a: "GEO optimizes your site so AI assistants like ChatGPT, Perplexity and Google's AI overviews cite it. We structure content, add schema.org data and publish an llms.txt so the machines can quote you accurately.",
+      },
+      {
+        q: "Can you manage our social from our own site?",
+        a: "Yes — we build a dashboard into your own site to plan, publish and monitor every channel, on top of automated content and scheduling.",
+      },
+      {
+        q: "How fast can we start?",
+        a: "A focused project typically kicks off within a week or two; smaller automations can ship in days.",
+      },
+      {
+        q: "Do you only build with AI?",
+        a: "No. We use AI where it earns its place and classic engineering everywhere else — the goal is a reliable result, not a demo.",
+      },
+    ],
+  },
   footer: {
     eyebrow: "Let's build",
-    headingA: "Have a problem worth",
-    headingB: "solving well?",
+    headingA: "Have work worth",
+    headingB: "automating?",
     cta: "Start a project",
     sitemap: "Sitemap",
     social: "Social",
     contact: "Contact",
-    rights: "Applied intelligence studio.",
+    rights: "AI automation, web & growth studio.",
   },
   services: {
     headerEyebrow: "Services",
-    headerTitle: "From frontier research to dependable production.",
+    headerTitle: "Automation, web and growth — under one roof.",
     headerDesc:
-      "Four disciplines, run by senior people who do the work. Engage us for one, or all of them as a single system.",
+      "Four pillars, nine services. Take one, or run them as a single growth engine — for SMBs and enterprise teams alike.",
   },
   about: {
     headerEyebrow: "About",
-    headerTitle: "A senior studio for the intelligence era.",
+    headerTitle: "A small studio that ships.",
     headerDesc:
-      "No layers, no hand-offs to juniors. The people who scope your problem are the people who ship the system.",
+      "No layers, no hand-offs to juniors. The people who scope your problem are the people who build the system.",
     principlesEyebrow: "Principles",
     principlesTitle: "What we hold to.",
     peopleEyebrow: "The people",
     peopleTitle: "Small, senior, accountable.",
     values: [
       {
-        title: "Rigor over hype",
-        body: "We evaluate before we believe. Every system ships with a way to know it's working.",
+        title: "Outcomes over output",
+        body: "We're paid to move a metric — time saved, leads, revenue — not to ship slides.",
       },
       {
         title: "Taste is a feature",
         body: "Craft compounds. The way it feels is part of whether it works.",
       },
       {
-        title: "Own the outcome",
-        body: "We embed, we ship, we stay accountable to the metric — not the deck.",
+        title: "Automate the boring",
+        body: "If a human is doing it twice, it probably shouldn't be a human doing it.",
       },
       {
         title: "Build to compound",
-        body: "We leave teams faster than we found them. The advantage outlives the engagement.",
+        body: "We leave teams faster than we found them. The advantage outlives the project.",
       },
     ],
     team: [
-      { name: "Sofia Lindqvist", role: "Founder · ML Systems", initials: "SL" },
+      { name: "Sofia Lindqvist", role: "Founder · Automation", initials: "SL" },
       { name: "Marco Devlin", role: "Design Engineering", initials: "MD" },
-      { name: "Aria Chen", role: "Applied Research", initials: "AC" },
-      { name: "Tobias Renn", role: "Platform & Infra", initials: "TR" },
+      { name: "Aria Chen", role: "Web & E-commerce", initials: "AC" },
+      { name: "Tobias Renn", role: "Growth & SEO/GEO", initials: "TR" },
     ],
   },
   contact: {
     headerEyebrow: "Contact",
-    headerTitle: "Let's build something intelligent.",
+    headerTitle: "Let's build something that works.",
     headerDesc:
       "Tell us about the problem. The more specific, the better — we reply to every serious note.",
     email: "Email",
@@ -339,13 +424,12 @@ const en = {
       namePh: "Ada Lovelace",
       emailPh: "you@company.com",
       companyPh: "Where you work",
-      projectPh: "What are you trying to build?",
+      projectPh: "What are you trying to build or automate?",
       send: "Send message",
       sending: "Sending…",
       avgReply: "Avg. reply · 48h",
       successTitle: "Message received.",
-      successBody:
-        "we read every note and reply within two working days.",
+      successBody: "we read every note and reply within two working days.",
       successHi: "Thanks",
       sendAnother: "Send another →",
       errRequired: "required",
@@ -353,13 +437,13 @@ const en = {
       errDetail: "add detail",
     },
     reasons: [
-      "New engagement",
-      "Partnership",
-      "Press",
-      "Careers",
+      "AI automation",
+      "Website / e-commerce",
+      "Social",
+      "SEO / GEO / leads",
       "Just exploring",
     ],
-    budgets: ["< $50k", "$50k–$150k", "$150k–$500k", "$500k+"],
+    budgets: ["< $5k", "$5k–$25k", "$25k–$100k", "$100k+"],
   },
   ui: {
     themeToLight: "Switch to light",
@@ -370,9 +454,9 @@ const en = {
 
 const it: typeof en = {
   brand: {
-    tagline: "Intelligenza applicata per team ambiziosi.",
+    tagline: "Automazioni AI, siti e crescita — chiavi in mano.",
     description:
-      "Aether è uno studio di ingegneria AI. Progettiamo, costruiamo e portiamo in produzione prodotti intelligenti — dalla ricerca al rilascio — con occhio cinematografico e rigore ingegneristico.",
+      "Aether è uno studio AI. Costruiamo automazioni e sistemi multi-agente, progettiamo siti ed e-commerce e gestiamo la crescita — SEO/GEO, ricerca lead e automazione social — per piccole imprese e team enterprise.",
     location: "Milano · New York · Da remoto",
   },
   nav: {
@@ -385,23 +469,23 @@ const it: typeof en = {
     cta: "Inizia un progetto",
   },
   hero: {
-    badge: "Studio di ingegneria AI · Disponibili dal 2026",
-    line1: "AI di frontiera,",
-    line2serif: "ingegnerizzata",
-    line2rest: "per il rilascio.",
-    sub: "progetta, costruisce e rilascia prodotti intelligenti — dalla ricerca alla produzione — con occhio cinematografico e rigore ingegneristico.",
+    badge: "Studio AI · Automazione, web & crescita",
+    line1: "Mettiamo l'AI",
+    line2serif: "al lavoro",
+    line2rest: "per la tua azienda.",
+    sub: "costruisce automazioni AI, siti ed e-commerce, sistemi multi-agente e crescita — SEO/GEO, lead e social — per piccole imprese e team enterprise.",
     ctaPrimary: "Inizia un progetto",
-    ctaSecondary: "Guarda i lavori",
+    ctaSecondary: "Esplora i servizi",
     scroll: "Scorri",
   },
-  clients: { label: "Scelti da team che ridefiniscono il loro settore" },
+  clients: { label: "Scelti da team che preferiscono automatizzare" },
   manifesto: {
     eyebrow: "La nostra tesi",
     lines: [
-      "L'intelligenza non è una funzione da aggiungere.",
-      "È un materiale — e come ogni materiale, ha una sua venatura.",
-      "Lavoriamo con quella venatura: probabilistica, valutabile, viva.",
-      "Il risultato deve sembrare intenzionale, mai generico.",
+      "Alla maggior parte dei team non serve altro software.",
+      "Serve che il lavoro ripetitivo sparisca.",
+      "Così lo automatizziamo — e ci costruiamo intorno sito e pipeline.",
+      "In modo silenzioso, affidabile, on brand.",
     ],
   },
   chaos: {
@@ -416,70 +500,124 @@ const it: typeof en = {
     headingB: "struttura.",
     note: "Ogni sistema che rilasciamo fa lo stesso movimento: rumore in ingresso, ordine intenzionale in uscita.",
   },
-  capabilities: {
+  pillars: {
     eyebrow: "Cosa facciamo",
-    titleA: "Quattro discipline,",
-    titleB: "un solo sistema.",
+    titleA: "Quattro pilastri,",
+    titleB: "un solo motore di crescita.",
     core: "core",
     items: [
       {
-        id: "strategy",
+        id: "automation",
         index: 1,
-        title: "Strategia & Ricerca AI",
+        title: "Automazioni AI & Agenti",
         summary:
-          "Trasformiamo l'ambizione ancora vaga in una roadmap sequenziata e finanziabile di sistemi intelligenti.",
+          "Affidiamo il lavoro ripetitivo all'AI — agenti e automazioni che mandano avanti le operazioni 24/7.",
         detail:
-          "Mappatura delle opportunità, fattibilità dei modelli, audit dei dati e una sequenza di sviluppo che il tuo board può approvare. Riduciamo i rischi prima di scrivere una riga di codice di produzione.",
-        deliverables: [
-          "Modello opportunità & ROI",
-          "Audit dati & fattibilità",
-          "Framework di valutazione",
-          "Roadmap di sviluppo",
+          "Dalle automazioni di singoli task ai sistemi multi-agente che ragionano, usano i tuoi strumenti e agiscono, togliamo il lavoro manuale che rallenta il team — osservabile e sotto controllo.",
+        services: [
+          {
+            id: "automations",
+            title: "Automazioni AI su misura",
+            outcome: "Ore libere ogni settimana",
+            blurb:
+              "Automatizziamo i flussi ripetitivi che prosciugano il team — dati, documenti, operatività, follow-up.",
+          },
+          {
+            id: "multiagent",
+            title: "Sistemi multi-agente",
+            outcome: "Lavoro che si fa da solo",
+            blurb:
+              "Agenti AI coordinati che ragionano, usano i tuoi strumenti e completano attività reali end-to-end.",
+          },
+          {
+            id: "apps",
+            title: "App di automazione per PMI",
+            outcome: "Il tuo strumento AI",
+            blurb:
+              "App interne leggere che mettono l'automazione nelle mani del team, pensate per le piccole imprese.",
+          },
         ],
       },
       {
-        id: "product",
+        id: "web",
         index: 2,
-        title: "Design di Prodotto Generativo",
+        title: "Siti & E-commerce",
         summary:
-          "Interfacce per sistemi probabilistici — progettate perché le persone si fidino della macchina.",
+          "Siti che sembrano premium e vendono — dalla landing page allo store automatizzato con l'AI.",
         detail:
-          "Progettiamo i momenti in cui le persone incontrano i modelli: streaming, citazioni, undo, guardrail e la coreografia che fa sentire l'intelligenza intenzionale, non magica.",
-        deliverables: [
-          "Design language & token",
-          "Pattern di UI generativa",
-          "Prototipo in codice",
-          "Specifica di motion & interazione",
+          "Progettiamo e costruiamo siti veloci e orientati alla conversione: landing page, e-commerce completi e siti automatizzati con AI dove contenuti, supporto e merchandising si gestiscono da soli.",
+        services: [
+          {
+            id: "sites",
+            title: "Siti & e-commerce",
+            outcome: "Dalla landing allo store",
+            blurb:
+              "Landing page, siti vetrina ed e-commerce — veloci, premium, fatti per convertire.",
+          },
+          {
+            id: "ai-sites",
+            title: "Siti automatizzati AI",
+            outcome: "Un sito che si gestisce da solo",
+            blurb:
+              "Contenuti, chat, supporto e merchandising guidati dall'AI — il sito lavora mentre dormi.",
+          },
+          {
+            id: "redesign",
+            title: "Redesign",
+            outcome: "Una seconda prima impressione",
+            blurb:
+              "Trasformiamo siti datati in esperienze veloci, moderne e in linea col brand.",
+          },
         ],
       },
       {
-        id: "engineering",
+        id: "social",
         index: 3,
-        title: "Ingegneria ML Applicata",
+        title: "Social, automatizzati",
         summary:
-          "Pipeline di produzione: retrieval, fine-tuning, agent ed eval che non vanno alla deriva.",
+          "Presenza costante sui social — e gestisci tutto dall'admin del tuo sito.",
         detail:
-          "Da RAG e agent con tool-use fino a modelli fine-tuned e inferenza in tempo reale, costruiamo sistemi che reggono sotto carico — osservabili, valutabili e attenti ai costi.",
-        deliverables: [
-          "Sistemi di retrieval & agent",
-          "Fine-tuning & distillazione",
-          "Suite di eval & guardrail",
-          "Infrastruttura di inferenza",
+          "Automatizziamo contenuti, programmazione e risposte, e ti diamo una dashboard dentro il tuo sito per gestire ogni canale — senza strumenti sparsi, senza settimane saltate.",
+        services: [
+          {
+            id: "social-automation",
+            title: "Automazione social",
+            outcome: "Presenza sempre attiva",
+            blurb:
+              "Contenuti, programmazione ed engagement automatizzati che tengono il brand sempre visibile.",
+          },
+          {
+            id: "social-admin",
+            title: "Social dall'admin del sito",
+            outcome: "Un'unica admin, tutti i canali",
+            blurb:
+              "Una dashboard integrata nel tuo sito per pianificare, pubblicare e monitorare tutti i social — in un solo posto.",
+          },
         ],
       },
       {
-        id: "platform",
+        id: "growth",
         index: 4,
-        title: "Piattaforma & Scala",
+        title: "Visibilità & Crescita",
         summary:
-          "L'infrastruttura, l'osservabilità e la governance per gestire l'AI con serietà.",
+          "Farti trovare — da Google e dall'AI — e trasformare l'attenzione in lead qualificati.",
         detail:
-          "Controllo dei costi, tracing, red-teaming, routing dei modelli e l'impalcatura operativa che trasforma una demo brillante in una piattaforma affidabile su cui la tua azienda può poggiare.",
-        deliverables: [
-          "Routing modelli & gateway",
-          "Osservabilità & tracing",
-          "Governance & red-teaming",
-          "Deployment gestito",
+          "SEO e GEO per essere citati da motori di ricerca e assistenti AI, più ricerca lead che riempie la pipeline con i contatti giusti.",
+        services: [
+          {
+            id: "seo-geo",
+            title: "SEO & GEO",
+            outcome: "Trovato da Google e dall'AI",
+            blurb:
+              "SEO classica più Generative Engine Optimization — strutturati perché ChatGPT, Perplexity e Google ti citino.",
+          },
+          {
+            id: "leadgen",
+            title: "Ricerca lead",
+            outcome: "Una pipeline più piena",
+            blurb:
+              "Troviamo e qualifichiamo i contatti giusti: le vendite partono da una lista calda, non fredda.",
+          },
         ],
       },
     ],
@@ -487,81 +625,81 @@ const it: typeof en = {
   work: {
     eyebrow: "Lavori selezionati",
     heading: "Prove, non promesse.",
-    note: "Sistemi oggi in produzione — scorri lateralmente per attraversarli.",
+    note: "Esempi illustrativi di ciò che costruiamo — scorri lateralmente per attraversarli.",
     viewAll: "Tutti i lavori",
     headerEyebrow: "Lavori selezionati",
-    headerTitle: "Sistemi in produzione, non slide.",
+    headerTitle: "Cosa costruiamo, in pratica.",
     headerDesc:
-      "Un campione di ciò che abbiamo rilasciato. Ogni progetto lascia un segno misurabile — e un team più attrezzato per andare avanti.",
-    meta: ["40+ prodotti rilasciati", "6 settori", "2019 — oggi"],
+      "Esempi illustrativi tra automazione, web, social e crescita — rappresentativi del lavoro che facciamo.",
+    meta: ["Automazione · Web · Crescita", "PMI & enterprise", "2024 — oggi"],
     items: [
       {
-        slug: "northwind-copilot",
-        client: "Northwind",
-        title: "Un agent che chiude il bilancio",
-        category: "Sistemi Agentici",
+        slug: "aurora-commerce",
+        client: "Aurora",
+        title: "Un e-commerce che fa merchandising da solo",
+        category: "E-commerce AI",
         year: "2025",
         blurb:
-          "Un copilot finanziario che riconcilia i mastrini, redige i commenti agli scostamenti e non inventa mai un numero che non può citare.",
-        metric: "9 giorni → 4 ore",
-        metricLabel: "chiusura mensile",
+          "Uno store automatizzato con AI: schede prodotto, raccomandazioni e supporto che funzionano senza un team di contenuti dedicato.",
+        metric: "+34%",
+        metricLabel: "tasso di conversione",
         accent: "from-[#3fdcff] to-[#5b8cff]",
       },
       {
-        slug: "helios-vision",
-        client: "Helios",
-        title: "Vedere i difetti prima del rilascio",
-        category: "Computer Vision",
+        slug: "pulse-social",
+        client: "Pulse",
+        title: "Social in autopilot, on brand",
+        category: "Automazione Social",
         year: "2025",
         blurb:
-          "Rilevamento difetti in tempo reale sulla linea, eseguito all'edge con latenza sotto i 30ms e revisione human-in-the-loop.",
-        metric: "−72%",
-        metricLabel: "difetti sfuggiti",
+          "Contenuti e programmazione automatizzati su tutti i canali, gestiti dall'admin del sito del cliente.",
+        metric: "8 h/sett",
+        metricLabel: "risparmiate sui social",
         accent: "from-[#5b8cff] to-[#8b6cff]",
       },
       {
-        slug: "quanta-search",
-        client: "Quanta",
-        title: "Una ricerca che capisce davvero",
-        category: "Retrieval",
-        year: "2024",
+        slug: "meridian-leadgen",
+        client: "Meridian",
+        title: "Una pipeline che si riempie da sola",
+        category: "Lead Generation",
+        year: "2025",
         blurb:
-          "Una piattaforma di retrieval su dieci milioni di documenti con citazioni, permessi e risposte che i tuoi legali approvano.",
-        metric: "3,1×",
-        metricLabel: "accuratezza risposte",
+          "Un motore di ricerca lead che trova, arricchisce e qualifica i contatti direttamente nella inbox del team vendite.",
+        metric: "3,2×",
+        metricLabel: "lead qualificati",
         accent: "from-[#4fe3b0] to-[#3fdcff]",
       },
       {
-        slug: "vantage-forecast",
-        client: "Vantage",
-        title: "Prevedere l'imprevedibile",
-        category: "ML Applicato",
+        slug: "atlas-agents",
+        client: "Atlas",
+        title: "Operatività multi-agente per un team snello",
+        category: "Automazione Multi-agente",
         year: "2024",
         blurb:
-          "Un modello di domanda che fonde segnali classici e ragionamento LLM sul chiacchiericcio di mercato non strutturato.",
-        metric: "+18,4%",
-        metricLabel: "precisione previsioni",
+          "Agenti coordinati che gestiscono preventivi, inserimento dati e follow-up end-to-end per un piccolo team operativo.",
+        metric: "−60%",
+        metricLabel: "lavoro manuale",
         accent: "from-[#8b6cff] to-[#5b8cff]",
       },
       {
-        slug: "lumen-studio",
+        slug: "lumen-redesign",
         client: "Lumen",
-        title: "Uno studio creativo generativo",
-        category: "Media Generativi",
-        year: "2025",
+        title: "Un redesign che si è ripagato",
+        category: "Redesign Sito",
+        year: "2024",
         blurb:
-          "Generazione di immagini e testi on-brand con guardrail: così un team di 12 persone produce come uno da 100.",
-        metric: "20×",
-        metricLabel: "velocità dei contenuti",
+          "Un sito datato ricostruito in un'esperienza veloce, moderna e pronta per SEO/GEO — visibilità e conversioni in crescita.",
+        metric: "2,1×",
+        metricLabel: "traffico organico",
         accent: "from-[#3fdcff] to-[#4fe3b0]",
       },
     ],
   },
   particle: {
     eyebrow: "WebGL live · profondità interattiva",
-    headingA: "Profondità che puoi",
-    headingB: "toccare.",
-    copy: "Migliaia di punti, renderizzati in tempo reale. Muovi il cursore — il campo si apre intorno ad esso. È la stessa cura che mettiamo in ogni interfaccia.",
+    headingA: "Cura che puoi",
+    headingB: "sentire.",
+    copy: "Migliaia di punti, renderizzati in tempo reale. Muovi il cursore — il campo si apre intorno ad esso. La stessa cura la mettiamo in tutto ciò che rilasciamo.",
     hint: "↖ muovi il cursore",
   },
   process: {
@@ -569,27 +707,27 @@ const it: typeof en = {
     titleA: "Un metodo,",
     titleB: "non una scommessa.",
     intro:
-      "Quattro fasi che trasformano un'idea brillante in un sistema affidabile — e lasciano il tuo team più veloce di come l'abbiamo trovato.",
+      "Quattro fasi che trasformano un'idea in un sistema affidabile — e lasciano il tuo team più veloce di come l'abbiamo trovato.",
     steps: [
       {
         phase: "01",
         title: "Immersione",
-        body: "Due settimane dentro il tuo problema. Mappiamo dati, vincoli e la forma del valore prima di proporre qualsiasi cosa.",
+        body: "Mappiamo flussi, dati e obiettivi prima di proporre qualcosa. Troviamo prima il lavoro che vale la pena automatizzare.",
       },
       {
         phase: "02",
         title: "Prototipo",
-        body: "Un prototipo funzionante e valutabile in codice — non slide. Dimostriamo che il modello si merita il suo posto.",
+        body: "Un prototipo funzionante in giorni — non slide. Vedi presto l'automazione, il sito o l'agent fare il lavoro vero.",
       },
       {
         phase: "03",
-        title: "Produzione",
-        body: "Irrobustiamo il sistema: eval, guardrail, osservabilità e l'infrastruttura per scalarlo in sicurezza.",
+        title: "Rilascio",
+        body: "Lo portiamo in produzione: affidabile, osservabile, on brand e collegato al resto del tuo stack.",
       },
       {
         phase: "04",
         title: "Compounding",
-        body: "Ci integriamo nel tuo team perché la capacità — e il vantaggio — continuino a crescere anche dopo di noi.",
+        body: "Affiniamo ed estendiamo, così il tempo risparmiato — e la crescita — continuano ad accumularsi dopo il lancio.",
       },
     ],
   },
@@ -600,83 +738,114 @@ const it: typeof en = {
     items: [
       {
         quote:
-          "Aether ha rilasciato in dieci settimane ciò che il nostro team interno rincorreva da un anno. La differenza è stata il rigore — hanno valutato tutto.",
-        name: "Elena Markov",
-        role: "Chief Product Officer, Northwind",
+          "Aether ha automatizzato il lavoro che ci mangiava le serate. Ora lo store va praticamente da solo.",
+        name: "Elena Conti",
+        role: "Founder, Aurora",
       },
       {
         quote:
-          "Trattano i modelli come ingegneria, non come magia. Il sistema è in produzione da otto mesi senza un solo guasto silenzioso.",
-        name: "David Osei",
-        role: "VP Engineering, Helios",
+          "I nostri social sono passati da sporadici a sempre attivi — e gestiamo tutto dalla nostra dashboard.",
+        name: "David Hsu",
+        role: "Marketing Lead, Pulse",
       },
       {
         quote:
-          "Il team più senior con cui abbiamo lavorato. Hanno reso la nostra AI inevitabile, non un'aggiunta posticcia.",
-        name: "Priya Nair",
-        role: "Founder & CEO, Quanta",
+          "Il motore lead riempie la pipeline con le persone giuste. Le vendite partono finalmente calde.",
+        name: "Priya Shah",
+        role: "Head of Growth, Meridian",
       },
     ],
   },
   stats: [
-    { value: "12×", label: "accelerazione mediana nel portare i modelli in produzione" },
-    { value: "$240M", label: "valore aziendale influenzato dai nostri sistemi" },
-    { value: "40+", label: "prodotti intelligenti progettati e rilasciati" },
-    { value: "99,98%", label: "uptime di inferenza sui deployment gestiti" },
+    { value: "10+ h", label: "risparmiate a settimana per ogni flusso automatizzato" },
+    { value: "+34%", label: "aumento mediano di conversione sui siti che rifacciamo" },
+    { value: "3,2×", label: "lead qualificati in più dalla ricerca automatizzata" },
+    { value: "24/7", label: "agenti e automazioni che mandano avanti le operazioni" },
   ],
+  faq: {
+    eyebrow: "FAQ",
+    titleA: "Domande,",
+    titleB: "risposte.",
+    items: [
+      {
+        q: "Di cosa si occupa esattamente Aether?",
+        a: "Costruiamo automazioni AI e sistemi multi-agente, progettiamo siti ed e-commerce e gestiamo la crescita — SEO/GEO, ricerca lead e automazione social — per piccole imprese e team enterprise.",
+      },
+      {
+        q: "Lavorate con le piccole imprese?",
+        a: "Sì. Gran parte del nostro lavoro sono app di automazione e siti automatizzati con AI dimensionati per team piccoli, con prezzi e perimetro adeguati.",
+      },
+      {
+        q: "Cos'è la GEO (Generative Engine Optimization)?",
+        a: "La GEO ottimizza il sito perché gli assistenti AI come ChatGPT, Perplexity e le AI overview di Google lo citino. Strutturiamo i contenuti, aggiungiamo i dati schema.org e pubblichiamo un llms.txt perché le macchine possano citarti correttamente.",
+      },
+      {
+        q: "Potete gestire i nostri social dal nostro sito?",
+        a: "Sì — integriamo nel tuo sito una dashboard per pianificare, pubblicare e monitorare ogni canale, oltre a contenuti e programmazione automatizzati.",
+      },
+      {
+        q: "Quanto velocemente possiamo partire?",
+        a: "Un progetto mirato parte di solito in una o due settimane; le automazioni più piccole escono in pochi giorni.",
+      },
+      {
+        q: "Costruite solo con l'AI?",
+        a: "No. Usiamo l'AI dove serve davvero e ingegneria classica per tutto il resto — l'obiettivo è un risultato affidabile, non una demo.",
+      },
+    ],
+  },
   footer: {
     eyebrow: "Costruiamo",
-    headingA: "Hai un problema che vale",
-    headingB: "la pena risolvere bene?",
+    headingA: "Hai un lavoro che vale",
+    headingB: "la pena automatizzare?",
     cta: "Inizia un progetto",
     sitemap: "Mappa del sito",
     social: "Social",
     contact: "Contatti",
-    rights: "Studio di intelligenza applicata.",
+    rights: "Studio di automazione AI, web & crescita.",
   },
   services: {
     headerEyebrow: "Servizi",
-    headerTitle: "Dalla ricerca di frontiera alla produzione affidabile.",
+    headerTitle: "Automazione, web e crescita — sotto un solo tetto.",
     headerDesc:
-      "Quattro discipline, gestite da persone senior che fanno il lavoro. Ingaggiaci per una, o per tutte come un unico sistema.",
+      "Quattro pilastri, nove servizi. Prendine uno, o falli girare come un unico motore di crescita — per PMI e team enterprise.",
   },
   about: {
     headerEyebrow: "Studio",
-    headerTitle: "Uno studio senior per l'era dell'intelligenza.",
+    headerTitle: "Uno studio piccolo che rilascia.",
     headerDesc:
-      "Nessun livello intermedio, nessun passaggio ai junior. Chi inquadra il tuo problema è chi rilascia il sistema.",
+      "Nessun livello intermedio, nessun passaggio ai junior. Chi inquadra il tuo problema è chi costruisce il sistema.",
     principlesEyebrow: "Principi",
     principlesTitle: "Ciò a cui teniamo.",
     peopleEyebrow: "Le persone",
     peopleTitle: "Pochi, senior, responsabili.",
     values: [
       {
-        title: "Rigore prima dell'hype",
-        body: "Valutiamo prima di credere. Ogni sistema esce con un modo per sapere se funziona.",
+        title: "Risultati, non output",
+        body: "Siamo pagati per muovere una metrica — tempo risparmiato, lead, ricavi — non per fare slide.",
       },
       {
         title: "Il gusto è una feature",
         body: "L'artigianalità si accumula. Come ci si sente fa parte di se funziona.",
       },
       {
-        title: "Possedere il risultato",
-        body: "Ci integriamo, rilasciamo, restiamo responsabili della metrica — non della presentazione.",
+        title: "Automatizza il noioso",
+        body: "Se una persona lo fa due volte, probabilmente non dovrebbe farlo una persona.",
       },
       {
         title: "Costruire per accumulare",
-        body: "Lasciamo i team più veloci di come li abbiamo trovati. Il vantaggio sopravvive all'incarico.",
+        body: "Lasciamo i team più veloci di come li abbiamo trovati. Il vantaggio sopravvive al progetto.",
       },
     ],
     team: [
-      { name: "Sofia Lindqvist", role: "Founder · Sistemi ML", initials: "SL" },
+      { name: "Sofia Lindqvist", role: "Founder · Automazione", initials: "SL" },
       { name: "Marco Devlin", role: "Design Engineering", initials: "MD" },
-      { name: "Aria Chen", role: "Ricerca Applicata", initials: "AC" },
-      { name: "Tobias Renn", role: "Piattaforma & Infra", initials: "TR" },
+      { name: "Aria Chen", role: "Web & E-commerce", initials: "AC" },
+      { name: "Tobias Renn", role: "Crescita & SEO/GEO", initials: "TR" },
     ],
   },
   contact: {
     headerEyebrow: "Contatti",
-    headerTitle: "Costruiamo qualcosa di intelligente.",
+    headerTitle: "Costruiamo qualcosa che funziona.",
     headerDesc:
       "Raccontaci il problema. Più sei specifico, meglio è — rispondiamo a ogni messaggio serio.",
     email: "Email",
@@ -697,13 +866,12 @@ const it: typeof en = {
       namePh: "Ada Lovelace",
       emailPh: "tu@azienda.com",
       companyPh: "Dove lavori",
-      projectPh: "Cosa stai cercando di costruire?",
+      projectPh: "Cosa vuoi costruire o automatizzare?",
       send: "Invia messaggio",
       sending: "Invio…",
       avgReply: "Risposta media · 48h",
       successTitle: "Messaggio ricevuto.",
-      successBody:
-        "leggiamo ogni messaggio e rispondiamo entro due giorni lavorativi.",
+      successBody: "leggiamo ogni messaggio e rispondiamo entro due giorni lavorativi.",
       successHi: "Grazie",
       sendAnother: "Invia un altro →",
       errRequired: "obbligatorio",
@@ -711,13 +879,13 @@ const it: typeof en = {
       errDetail: "aggiungi dettagli",
     },
     reasons: [
-      "Nuovo incarico",
-      "Partnership",
-      "Stampa",
-      "Lavora con noi",
+      "Automazione AI",
+      "Sito / e-commerce",
+      "Social",
+      "SEO / GEO / lead",
       "Sto solo esplorando",
     ],
-    budgets: ["< 50k €", "50k–150k €", "150k–500k €", "500k+ €"],
+    budgets: ["< 5k €", "5k–25k €", "25k–100k €", "100k+ €"],
   },
   ui: {
     themeToLight: "Passa al chiaro",

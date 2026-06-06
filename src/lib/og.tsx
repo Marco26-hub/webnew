@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
    Satori at build time — no binary asset needed, on-brand navy + cyan. */
 
 export const ogSize = { width: 1200, height: 630 };
-export const ogAlt = "Aether — Applied intelligence for ambitious teams.";
+export const ogAlt = "Aether — AI automation, websites and growth.";
 export const ogContentType = "image/png";
 
 export function renderOgImage() {
@@ -24,7 +24,6 @@ export function renderOgImage() {
           fontFamily: "sans-serif",
         }}
       >
-        {/* glow washes */}
         <div
           style={{
             position: "absolute",
@@ -42,7 +41,6 @@ export function renderOgImage() {
           }}
         />
 
-        {/* top row */}
         <div
           style={{
             display: "flex",
@@ -75,16 +73,15 @@ export function renderOgImage() {
           <span
             style={{
               fontSize: "20px",
-              letterSpacing: "0.28em",
+              letterSpacing: "0.24em",
               color: "#3fdcff",
               textTransform: "uppercase",
             }}
           >
-            AI Engineering Studio
+            Automation · Web · Growth
           </span>
         </div>
 
-        {/* headline */}
         <div
           style={{
             display: "flex",
@@ -94,19 +91,21 @@ export function renderOgImage() {
         >
           <div
             style={{
-              fontSize: "92px",
+              fontSize: "84px",
               fontWeight: 700,
-              lineHeight: 1.02,
+              lineHeight: 1.05,
               letterSpacing: "-0.035em",
               display: "flex",
               flexWrap: "wrap",
             }}
           >
-            Frontier AI, <span style={{ color: "#3fdcff", marginLeft: "18px" }}>engineered to ship.</span>
+            We put AI to work
+            <span style={{ color: "#3fdcff", marginLeft: "20px" }}>
+              for your business.
+            </span>
           </div>
         </div>
 
-        {/* bottom row */}
         <div
           style={{
             display: "flex",
@@ -117,7 +116,7 @@ export function renderOgImage() {
           }}
         >
           <span style={{ color: "#98a7c6" }}>
-            Applied intelligence for ambitious teams.
+            AI automation, websites and growth.
           </span>
           <span style={{ color: "#5a688a" }}>webnew-five.vercel.app</span>
         </div>

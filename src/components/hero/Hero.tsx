@@ -124,7 +124,7 @@ export function Hero() {
           <Button href="/contact" size="lg" arrow magnetic>
             {t.hero.ctaPrimary}
           </Button>
-          <Button href="/work" size="lg" variant="secondary" magnetic>
+          <Button href="/services" size="lg" variant="secondary" magnetic>
             {t.hero.ctaSecondary}
           </Button>
         </motion.div>

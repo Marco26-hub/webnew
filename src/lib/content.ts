@@ -17,12 +17,12 @@ export const site = {
 };
 
 export const clients: string[] = [
-  "Northwind",
-  "Helios",
-  "Quanta",
-  "Vantage",
-  "Lumen",
+  "Aurora",
+  "Pulse",
+  "Meridian",
   "Atlas",
-  "Foundry",
-  "Polaris",
+  "Lumen",
+  "Vela",
+  "Forma",
+  "Nova",
 ];

@@ -42,7 +42,12 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
             <span aria-hidden>←</span>
             {labels.back}
           </Link>
-          <p className="eyebrow mt-8">{project.category}</p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <p className="eyebrow">{project.category}</p>
+            <span className="rounded-full border border-line-bright px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-wide text-faint">
+              {labels.illustrative}
+            </span>
+          </div>
           <h1 className="mt-5 max-w-4xl text-[clamp(2.4rem,6vw,4.8rem)] font-semibold leading-[0.98] tracking-tight">
             {project.title}
           </h1>

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ContactScreen } from "@/components/screens/ContactScreen";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contatti",
   description:
-    "Start a project with Aether. Tell us what you're trying to build.",
+    "Inizia un progetto con Aether. Raccontaci cosa vuoi costruire o automatizzare.",
 };
 
 export default function ContactPage() {

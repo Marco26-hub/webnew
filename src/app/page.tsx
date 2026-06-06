@@ -6,8 +6,11 @@ import { CapabilitiesOrbit } from "@/components/sections/CapabilitiesOrbit";
 import { WorkShowcase } from "@/components/sections/WorkShowcase";
 import { ParticleSection } from "@/components/sections/ParticleSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
+import { FAQ } from "@/components/sections/FAQ";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Stats } from "@/components/sections/Stats";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqLd } from "@/lib/structuredData";
 
 export default function HomePage() {
   return (
@@ -20,8 +23,10 @@ export default function HomePage() {
       <WorkShowcase />
       <ParticleSection />
       <ProcessSection />
+      <FAQ />
       <Testimonials />
       <Stats />
+      <JsonLd data={faqLd("it")} />
     </>
   );
 }

@@ -11,7 +11,7 @@ import { useI18n } from "@/components/providers/AppProviders";
 import type { Dict } from "@/lib/i18n";
 import { clamp, lerp, pad } from "@/lib/utils";
 
-type Cap = Dict["capabilities"]["items"][number];
+type Cap = Dict["pillars"]["items"][number];
 
 const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -84,7 +84,7 @@ export function CapabilitiesOrbit() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
-  const items = t.capabilities.items;
+  const items = t.pillars.items;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -112,10 +112,10 @@ export function CapabilitiesOrbit() {
         className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden"
       >
         <div className="shell pointer-events-none absolute top-0 left-0 right-0 z-20 pt-[12vh]">
-          <p className="eyebrow">{t.capabilities.eyebrow}</p>
+          <p className="eyebrow">{t.pillars.eyebrow}</p>
           <h2 className="mt-4 max-w-2xl text-4xl font-semibold tracking-tight sm:text-6xl">
-            {t.capabilities.titleA}
-            <span className="text-muted"> {t.capabilities.titleB}</span>
+            {t.pillars.titleA}
+            <span className="text-muted"> {t.pillars.titleB}</span>
           </h2>
         </div>
 
@@ -148,7 +148,7 @@ export function CapabilitiesOrbit() {
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgba(63,220,255,0.45),transparent_70%)] blur-md" />
             <div className="glass relative grid h-24 w-24 place-items-center rounded-full border border-line-bright">
               <span className="font-mono text-[0.62rem] uppercase tracking-[0.2em] text-accent">
-                {t.capabilities.core}
+                {t.pillars.core}
               </span>
             </div>
           </div>

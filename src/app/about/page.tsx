@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { AboutScreen } from "@/components/screens/AboutScreen";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "Studio",
   description:
-    "Aether is a small, senior studio building the intelligence inside ambitious products.",
+    "Aether è uno studio AI piccolo e senior: automazioni, siti, social e crescita per PMI e team enterprise.",
 };
 
 export default function AboutPage() {
