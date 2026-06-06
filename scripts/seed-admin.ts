@@ -36,12 +36,12 @@ for (const file of [".env.local", ".env"]) {
   }
 }
 
-const { db } = await import("../src/lib/db");
-const { user, account } = await import("../src/lib/db/schema");
-const { hashPassword } = await import("better-auth/crypto");
-const { eq } = await import("drizzle-orm");
-
 async function main() {
+  const { db } = await import("../src/lib/db");
+  const { user, account } = await import("../src/lib/db/schema");
+  const { hashPassword } = await import("better-auth/crypto");
+  const { eq } = await import("drizzle-orm");
+
   const email = process.env.SEED_ADMIN_EMAIL?.trim();
   const password = process.env.SEED_ADMIN_PASSWORD;
   const name = process.env.SEED_ADMIN_NAME?.trim() || "Admin";
