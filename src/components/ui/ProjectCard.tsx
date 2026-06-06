@@ -37,7 +37,8 @@ export function ProjectCard({
   const spotlight = useMotionTemplate`radial-gradient(240px circle at ${sx}px ${sy}px, rgba(255,255,255,0.22), transparent 60%)`;
 
   const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (reduce) return;
+    // Mouse only — never tilt during a touch swipe in the carousel.
+    if (reduce || e.pointerType !== "mouse") return;
     const el = mediaRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();

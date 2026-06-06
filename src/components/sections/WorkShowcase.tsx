@@ -1,52 +1,105 @@
 "use client";
 
-import { LocalizedLink } from "@/components/ui/LocalizedLink";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useI18n } from "@/components/providers/AppProviders";
-import { HorizontalScroll } from "@/components/scroll/HorizontalScroll";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { LocalizedLink } from "@/components/ui/LocalizedLink";
 import { ArrowRight } from "@/components/ui/Icons";
+import { cn } from "@/lib/utils";
 
+/**
+ * Native horizontal carousel: swipe (touch/trackpad), arrow buttons and
+ * scroll-snap. Reliable everywhere — no scroll-jacking / pinning.
+ */
 export function WorkShowcase() {
   const { t } = useI18n();
+  const scroller = useRef<HTMLDivElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const update = useCallback(() => {
+    const el = scroller.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 8);
+    setAtEnd(el.scrollLeft >= el.scrollWidth - el.clientWidth - 8);
+  }, []);
+
+  useEffect(() => {
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [update]);
+
+  const nudge = (dir: number) => {
+    const el = scroller.current;
+    if (!el) return;
+    el.scrollBy({
+      left: dir * Math.min(el.clientWidth * 0.85, 360),
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <HorizontalScroll
-      className="bg-base"
-      intro={
-        <div className="shell mb-10 flex items-end justify-between md:mb-14">
-          <div>
-            <p className="eyebrow">{t.work.eyebrow}</p>
-            <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
-              {t.work.heading}
-            </h2>
-          </div>
-          <p className="hidden max-w-xs text-sm leading-relaxed text-muted md:block">
+    <section className="relative py-20 md:py-28">
+      <div className="shell mb-10 flex flex-wrap items-end justify-between gap-x-6 gap-y-5 md:mb-12">
+        <div>
+          <p className="eyebrow">{t.work.eyebrow}</p>
+          <h2 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
+            {t.work.heading}
+          </h2>
+        </div>
+        <div className="flex items-center gap-4">
+          <p className="hidden max-w-xs text-sm leading-relaxed text-muted lg:block">
             {t.work.note}
           </p>
-        </div>
-      }
-    >
-      {t.work.items.map((project, i) => (
-        <ProjectCard
-          key={project.slug}
-          project={project}
-          index={i}
-          className="w-[78vw] shrink-0 sm:w-[340px] md:w-[400px]"
-        />
-      ))}
-      <LocalizedLink
-        href="/work"
-        className="group flex w-[62vw] shrink-0 flex-col justify-center sm:w-[240px]"
-      >
-        <div className="panel grid aspect-[4/3] place-items-center rounded-2xl transition-colors duration-300 group-hover:border-accent/60">
-          <div className="text-center">
-            <div className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-line-bright transition-transform duration-300 group-hover:translate-x-1">
-              <ArrowRight className="h-5 w-5 text-accent" />
-            </div>
-            <p className="mt-4 text-lg font-medium">{t.work.viewAll}</p>
+          <div className="flex gap-2">
+            {[-1, 1].map((dir) => (
+              <button
+                key={dir}
+                onClick={() => nudge(dir)}
+                disabled={dir === -1 ? atStart : atEnd}
+                aria-label={dir === -1 ? "Previous" : "Next"}
+                className="grid h-11 w-11 place-items-center rounded-full border border-line-bright text-ink transition-all duration-300 hover:border-accent/60 hover:bg-elevated disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                <ArrowRight className={cn("h-4 w-4", dir === -1 && "rotate-180")} />
+              </button>
+            ))}
           </div>
         </div>
-      </LocalizedLink>
-    </HorizontalScroll>
+      </div>
+
+      <div className="relative">
+        <div
+          ref={scroller}
+          onScroll={update}
+          className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 py-4 md:px-10 md:py-6"
+        >
+          {t.work.items.map((project, i) => (
+            <div
+              key={project.slug}
+              className="w-[76vw] shrink-0 snap-start sm:w-[290px] md:w-[310px]"
+            >
+              <ProjectCard project={project} index={i} />
+            </div>
+          ))}
+          <LocalizedLink
+            href="/work"
+            className="group flex w-[60vw] shrink-0 snap-start flex-col justify-center sm:w-[220px]"
+          >
+            <div className="panel grid aspect-[4/3] place-items-center rounded-[1.4rem] transition-colors duration-300 group-hover:border-accent/60">
+              <div className="text-center">
+                <div className="mx-auto grid h-12 w-12 place-items-center rounded-full border border-line-bright transition-transform duration-300 group-hover:translate-x-1">
+                  <ArrowRight className="h-5 w-5 text-accent" />
+                </div>
+                <p className="mt-4 text-base font-medium">{t.work.viewAll}</p>
+              </div>
+            </div>
+          </LocalizedLink>
+        </div>
+
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-base to-transparent md:w-12" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-base to-transparent md:w-12" />
+      </div>
+    </section>
   );
 }

@@ -19,7 +19,7 @@ and production-grade Next.js.
 | Interactive WebGL particle depth (cursor parts the field) | `components/webgl/ParticleField.tsx` |
 | "Chaos → Order" — scroll-scrubbed particle sequence | `components/scroll/ChaosToOrder.tsx` |
 | Orbital scroll choreography (elements recompose) | `components/sections/CapabilitiesOrbit.tsx` |
-| Horizontal scroll (vertical → horizontal hand-off) | `components/scroll/HorizontalScroll.tsx` |
+| Horizontal work carousel (swipe + arrows + snap) | `components/sections/WorkShowcase.tsx` |
 | Magnetic buttons / custom cursor / scroll progress | `components/ui/*` |
 | Design tokens (color, type, radius, motion, easing) | `app/globals.css` (`@theme`) |
 | All copy in one place ("context graph") | `lib/content.ts` |
