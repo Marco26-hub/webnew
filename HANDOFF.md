@@ -19,8 +19,9 @@ carousel. Everything below under "Architecture/Services" is **done & deployed**.
    Build in IT+EN with `Offer`/`AggregateOffer` JSON-LD. US 2026 MRR benchmarks
    (adapt to EU): AI receptionist $149–299/mo · managed automation retainer
    $500–5k/mo · SEO+GEO $1.5k–10k/mo · social mgmt $2k–7.5k/mo · website care plan.
-2. **Admin dashboard (Supabase)** — *fully planned, not built.* See "Admin plan" below.
-   Needs the user's Supabase env vars (or MCP authorization) + one seeded admin user.
+2. **Admin dashboard** — ✅ *built* on **Neon Postgres + Drizzle + Better Auth** (replaces the
+   earlier Supabase plan). Leads/Clients/Appointments at `/admin`. Just needs env vars +
+   `npm run db:migrate` + `npm run db:seed`. See "Admin dashboard (implemented)" below.
 3. **Proposed new "trendy" services** (not added) — AI chatbot/support + **WhatsApp Business** automation; **AI ad creatives/UGC**; **GEO/AEO audit** as a low-cost entry offer; **AI Readiness/Automation audit**. Fold into existing pillars if approved.
 4. **Content gaps to consider** — pricing (above), a "who it's for"/segments block, and **real** case studies (current ones are labeled "illustrative example").
 
@@ -70,22 +71,47 @@ Home: `CapabilitiesOrbit` (orbit of pillars) + FAQ. `/services`: `ServicesBento`
 - **Work carousel** (`WorkShowcase`): native scroll-snap, swipe + arrow buttons, left-aligned to content + full-bleed right (`.bleed-right` utility in globals). Marquee (`Marquee`) is rAF-based + pauses on hover.
 - Magnetic buttons, custom cursor, scroll-progress bar, page transitions, WebGL hero/particles.
 
-## Admin plan (Supabase) — design ready, NOT implemented
-Audience: **agency team only now, role-ready** for a future client portal. Modules:
-**Leads, Clients, Appointments**. Auth: **email+password** (no public signup). DB:
-**existing Supabase project** via env (do not create one).
-- Deps: `@supabase/ssr`, `@supabase/supabase-js`, `server-only`.
-- `src/lib/supabase/{client,server,admin,middleware}.ts` (browser / SSR-cookies server / service-role / `updateSession`).
-- **Middleware**: add an `/admin`+`/api/admin` branch that runs `updateSession` and returns BEFORE the locale logic (so admin is never locale-redirected); add `"/api/admin/:path*"` to the matcher.
-- Routes under `src/app/admin/` (outside `[lang]`): `login/` (unguarded) + `(protected)/` route group (guard via `auth.getUser()` → redirect `/admin/login`) with `page` (dashboard), `leads/`, `clients/`, `appointments/`. Mutations = Server Actions in `admin/actions.ts`; sign-in is client-side via the browser client.
-- **Contact route** inserts the lead via the service-role client (guarded by `SUPABASE_SERVICE_ROLE_KEY`, never breaks email).
-- **SQL migration** `supabase/migrations/0001_admin_dashboard_init.sql`: `profiles`(role), `clients`, `leads`, `appointments` + enums + `is_admin()` + RLS (admin-all; service role bypasses; `client_id` FK reserved for future scoping). Apply via Supabase SQL editor or `mcp__Supabase__apply_migration`. Seed admin: create user in Supabase Auth, then `insert into profiles(id,role) values('<uuid>','admin')`.
-- Admin UI reuses tokens (`panel`, `--color-positive/warn/accent`) + `Button`/`Icons`; new `src/components/admin/*` (Sidebar, Table, StatusBadge, Field, StatCard, LoginForm, SignOutButton). Force dark via `className="dark"` on the shell.
-- Env to add: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server-only). Add `.env.example`.
+## Admin dashboard (implemented) — Neon + Drizzle + Better Auth
+Internal tool for the **agency team** (no public signup), role-ready for a future client
+portal. Modules: **Leads, Clients, Appointments**. Lives at **`/admin`**, OUTSIDE `[lang]`
+(middleware bypasses `/admin` so it's never locale-redirected). Forced dark theme.
+
+- **Stack**: Neon Postgres · Drizzle ORM (`drizzle-orm/node-postgres` + `pg`) · Better Auth
+  (email+password, `disableSignUp`, `admin()` plugin for roles). Auth tables + business
+  tables share one Postgres DB.
+- **Files**: `src/lib/db/{schema,index}.ts` (Drizzle schema + pooled client),
+  `src/lib/auth.ts` (Better Auth server) + `src/lib/auth-client.ts` (browser client),
+  `src/lib/admin/{auth,queries,format}.ts`, `src/app/api/auth/[...all]/route.ts` (Better Auth
+  handler), `src/app/admin/` (`login/` + `(protected)/` group: dashboard, `leads/`,
+  `clients/`, `appointments/`), `src/app/admin/actions.ts` (Server Actions — each re-checks
+  `requireAdmin()`), `src/components/admin/*` (Sidebar, Table, StatusBadge, StatCard, Field,
+  LoginForm, SignOutButton, StatusSelect, DeleteButton).
+- **Auth guard**: `(protected)/layout.tsx` calls `requireAdmin()` (`auth.api.getSession` →
+  redirect `/admin/login`; checks `role === "admin"`). Sign-in/out via the browser client.
+- **Contact route** also persists each enquiry as a `leads` row (best-effort; never blocks
+  the email — guarded by `DATABASE_URL`, dynamic import).
+- **DB tooling** (package scripts): `db:generate` (✅ first migration committed at
+  `drizzle/0000_*.sql`) · `db:migrate` / `db:push` (apply) · `db:studio` · `db:seed`
+  (create first admin). Drizzle config: `drizzle.config.ts`.
+- **Reuses site tokens** (`panel`, `--color-accent/positive/warn`, `Icons`).
+- ⚠️ **kysely pin**: `overrides.kysely = 0.28.17` in `package.json` — Better Auth 1.6's bundled
+  `@better-auth/kysely-adapter` imports `DEFAULT_MIGRATION_TABLE`/`_LOCK_TABLE` from `kysely`'s
+  main entry, which **kysely 0.29.2 moved** to `kysely/migration`. The pin keeps the build green;
+  revisit when Better Auth updates the adapter.
+
+### Setup (one-time)
+1. Create a **Neon** project → copy the **pooled** connection string (keep `?sslmode=require`).
+2. `cp .env.example .env.local`, then fill `DATABASE_URL`, `BETTER_AUTH_SECRET`
+   (`openssl rand -base64 32`), `BETTER_AUTH_URL`, and `SEED_ADMIN_*`.
+3. `npm run db:migrate` (or `db:push`) → creates the tables.
+4. `npm run db:seed` → creates the first admin. Sign in at `/admin/login`.
+5. On **Vercel** set `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL` (Production).
 
 ## Env vars (Vercel)
 - `RESEND_API_KEY`, `CONTACT_TO_EMAIL` (+ optional `CONTACT_FROM_EMAIL`) — contact form email (`src/app/api/contact/route.ts`); without them it logs + returns `{ ok:true, delivered:false }`.
-- (Admin, when built) the three `SUPABASE_*` vars above.
+- **Admin dashboard**: `DATABASE_URL` (Neon pooled, `?sslmode=require`), `BETTER_AUTH_SECRET`
+  (`openssl rand -base64 32`), `BETTER_AUTH_URL` (prod URL). `SEED_ADMIN_*` are read only once by
+  `npm run db:seed`. See `.env.example`.
 
 ## Reminders
 - 🔴 **Revoke the GitHub PAT** used for pushes (it passed through chat).
