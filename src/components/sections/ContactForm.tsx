@@ -87,10 +87,16 @@ export function ContactForm() {
           message,
         }),
       });
-      const json = await res.json().catch(() => ({ ok: false }));
+      const json = await res.json().catch((e) => {
+        if (process.env.NODE_ENV !== "production")
+          console.warn("[aether] contact: invalid JSON response", e);
+        return { ok: false };
+      });
       if (!res.ok || !json.ok) throw new Error("send_failed");
       setStatus("done");
-    } catch {
+    } catch (err) {
+      if (process.env.NODE_ENV !== "production")
+        console.warn("[aether] contact submit failed", err);
       setStatus("idle");
       setSendError(true);
     }

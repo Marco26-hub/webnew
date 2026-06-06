@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { dictionaries, isLang, type Lang } from "@/lib/i18n";
+import { caseStudies } from "@/lib/caseStudies";
 import { pageMetadata } from "@/lib/seo";
 import { CaseStudyScreen } from "@/components/screens/CaseStudyScreen";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -29,7 +30,9 @@ export default async function CaseStudyPage({
   const { lang, slug } = await params;
   const l: Lang = isLang(lang) ? lang : "it";
   const project = dictionaries[l].work.items.find((p) => p.slug === slug);
-  if (!project) notFound();
+
+  // 404 (not a blank page) if the project or its case-study content is missing.
+  if (!project || !caseStudies[l][slug]) notFound();
 
   return (
     <>

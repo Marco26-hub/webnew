@@ -15,7 +15,14 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
   const cs = caseStudies[lang][slug];
   const labels = caseLabels[lang];
 
-  if (!project || !cs) return null;
+  if (!project || !cs) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(
+        `[aether] CaseStudyScreen: missing data for slug "${slug}" — project:${!!project} caseStudy:${!!cs}`,
+      );
+    }
+    return null;
+  }
 
   const next = items[(idx + 1) % items.length];
   const meta = [

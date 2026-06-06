@@ -57,7 +57,11 @@ export function ChaosToOrder() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      if (process.env.NODE_ENV !== "production")
+        console.warn("[aether] ChaosToOrder: 2D canvas context unavailable");
+      return;
+    }
 
     let particles: Particle[] = [];
     let w = 0;
@@ -69,7 +73,11 @@ export function ChaosToOrder() {
       off.width = w;
       off.height = h;
       const octx = off.getContext("2d");
-      if (!octx) return [];
+      if (!octx) {
+        if (process.env.NODE_ENV !== "production")
+          console.warn("[aether] ChaosToOrder: offscreen 2D context unavailable");
+        return [];
+      }
       const fs = Math.min(w * 0.2, h * 0.62);
       octx.fillStyle = "#fff";
       octx.font = `900 ${fs}px Geist, Arial, sans-serif`;

@@ -1,4 +1,4 @@
-import type { Lang } from "@/lib/i18n";
+import { dictionaries, LANGS, type Lang } from "@/lib/i18n";
 
 /* Long-form case-study content, keyed by project slug + language.
    These are illustrative examples representative of our work. */
@@ -149,3 +149,23 @@ export const caseStudies: Record<Lang, Record<string, CaseStudy>> = {
     },
   },
 };
+
+// Dev-only integrity check: every work slug must have a case-study entry (and
+// vice versa) in each language. Surfaces data desync loudly instead of a
+// silently blank page.
+if (process.env.NODE_ENV !== "production") {
+  for (const lang of LANGS) {
+    const slugs = new Set(dictionaries[lang].work.items.map((p) => p.slug));
+    const keys = new Set(Object.keys(caseStudies[lang]));
+    for (const s of slugs)
+      if (!keys.has(s))
+        console.warn(
+          `[aether] caseStudies[${lang}] is missing an entry for work slug "${s}"`,
+        );
+    for (const k of keys)
+      if (!slugs.has(k))
+        console.warn(
+          `[aether] caseStudies[${lang}] has an orphan entry "${k}" with no matching work item`,
+        );
+  }
+}

@@ -7,8 +7,8 @@ import { NextResponse } from "next/server";
  *   RESEND_API_KEY     — your Resend key (https://resend.com)
  *   CONTACT_TO_EMAIL   — where enquiries should land
  *   CONTACT_FROM_EMAIL — verified sender, e.g. "Aether <hello@yourdomain.com>"
- * Without a key it logs the submission and still returns ok, so the form
- * works in development / before email is wired up.
+ * Without a key it logs the submission and returns { ok: true, delivered:
+ * false } — the form works, but no email is sent (surfaced in server logs).
  */
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -18,6 +18,7 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
+    console.warn("[contact] invalid JSON body");
     return NextResponse.json({ ok: false, error: "bad_request" }, { status: 400 });
   }
 
@@ -36,48 +37,46 @@ export async function POST(req: Request) {
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL ?? "Aether <onboarding@resend.dev>";
 
-  if (apiKey && to) {
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from,
-          to: [to],
-          reply_to: email,
-          subject: `New enquiry — ${name}${company ? ` (${company})` : ""}`,
-          text: [
-            `Name: ${name}`,
-            `Email: ${email}`,
-            `Company: ${company || "—"}`,
-            `Reason: ${reason || "—"}`,
-            `Budget: ${budget || "—"}`,
-            "",
-            message,
-          ].join("\n"),
-        }),
-      });
-      if (!res.ok) {
-        console.error("[contact] Resend error", res.status, await res.text());
-        return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
-      }
-    } catch (err) {
-      console.error("[contact] Resend exception", err);
-      return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
-    }
-  } else {
-    console.log("[contact] (email not configured) submission:", {
-      name,
-      email,
-      company,
-      reason,
-      budget,
-      message,
-    });
+  if (!apiKey || !to) {
+    // Not a silent success: log loudly so the owner knows email isn't wired up.
+    console.warn(
+      "[contact] email not configured (set RESEND_API_KEY + CONTACT_TO_EMAIL); submission logged only:",
+      { name, email, company, reason, budget, message },
+    );
+    return NextResponse.json({ ok: true, delivered: false });
   }
 
-  return NextResponse.json({ ok: true });
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: email,
+        subject: `New enquiry — ${name}${company ? ` (${company})` : ""}`,
+        text: [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Company: ${company || "—"}`,
+          `Reason: ${reason || "—"}`,
+          `Budget: ${budget || "—"}`,
+          "",
+          message,
+        ].join("\n"),
+      }),
+    });
+    if (!res.ok) {
+      console.error("[contact] Resend error", res.status, await res.text());
+      return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
+    }
+  } catch (err) {
+    console.error("[contact] Resend exception", err);
+    return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
+  }
+
+  return NextResponse.json({ ok: true, delivered: true });
 }
