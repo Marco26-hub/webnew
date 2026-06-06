@@ -204,6 +204,22 @@
     }
   }
 
+  /* Break a child out to the right viewport edge while keeping its left edge
+     aligned to the shell content — premium full-bleed carousel. */
+  .bleed-right {
+    margin-right: calc(-1 * max(1.5rem, (100vw - 84rem) / 2 + 1.5rem));
+  }
+  @media (min-width: 768px) {
+    .bleed-right {
+      margin-right: calc(-1 * max(2.5rem, (100vw - 84rem) / 2 + 2.5rem));
+    }
+  }
+  @media (min-width: 1280px) {
+    .bleed-right {
+      margin-right: calc(-1 * max(3.5rem, (100vw - 84rem) / 2 + 3.5rem));
+    }
+  }
+
   /* Mono eyebrow / kicker label */
   .eyebrow {
     font-family: var(--font-mono);
