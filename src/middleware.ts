@@ -13,6 +13,13 @@ function detectLocale(req: NextRequest): string {
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // The admin area lives outside [lang] and must never be locale-redirected.
+  // Auth is enforced in the protected route group, not here.
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+    return NextResponse.next();
+  }
+
   const hasLocale = (LOCALES as readonly string[]).some(
     (l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`),
   );

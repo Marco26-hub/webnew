@@ -33,6 +33,28 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   }
 
+  // Persist the lead for the admin dashboard. Best-effort: a DB hiccup (or no
+  // DATABASE_URL configured) must never break the contact UX or the email.
+  if (process.env.DATABASE_URL) {
+    try {
+      const [{ db }, { leads }] = await Promise.all([
+        import("@/lib/db"),
+        import("@/lib/db/schema"),
+      ]);
+      await db.insert(leads).values({
+        name,
+        email,
+        company: company || null,
+        reason: reason || null,
+        budget: budget || null,
+        message,
+        source: "website",
+      });
+    } catch (err) {
+      console.error("[contact] lead persist failed", err);
+    }
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL ?? "Aether <onboarding@resend.dev>";
