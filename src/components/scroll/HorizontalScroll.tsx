@@ -5,15 +5,16 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 type HorizontalScrollProps = {
   children: ReactNode;
-  /** lead-in content pinned to the left before the track scrolls */
+  /** lead-in content pinned above the track */
   intro?: ReactNode;
   className?: string;
 };
 
 /**
  * Pins a section and converts vertical scroll into horizontal travel. The
- * track distance is measured live, so the vertical scroll length matches the
- * horizontal overflow exactly — a smooth hand-off between the two axes.
+ * track distance is measured live and read via a ref inside a *functional*
+ * transform, so the mapping always uses the latest measurement (passing a
+ * fresh [0, -distance] range to useTransform does NOT update reactively).
  */
 export function HorizontalScroll({
   children,
@@ -22,21 +23,30 @@ export function HorizontalScroll({
 }: HorizontalScrollProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const distanceRef = useRef(0);
   const [distance, setDistance] = useState(0);
 
   useEffect(() => {
     const measure = () => {
       const track = trackRef.current;
       if (!track) return;
-      setDistance(Math.max(0, track.scrollWidth - window.innerWidth));
+      const d = Math.max(0, track.scrollWidth - window.innerWidth);
+      distanceRef.current = d;
+      setDistance(d);
     };
     measure();
+    const raf = requestAnimationFrame(measure);
+    const t = setTimeout(measure, 400);
     const ro = new ResizeObserver(measure);
     if (trackRef.current) ro.observe(trackRef.current);
     window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
     return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t);
       ro.disconnect();
       window.removeEventListener("resize", measure);
+      window.removeEventListener("load", measure);
     };
   }, [children]);
 
@@ -44,11 +54,11 @@ export function HorizontalScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
+  const xRaw = useTransform(scrollYProgress, (p) => -p * distanceRef.current);
+  const x = useSpring(xRaw, { stiffness: 140, damping: 28, mass: 0.3 });
 
-  const xRaw = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-  const x = useSpring(xRaw, { stiffness: 120, damping: 30, mass: 0.4 });
-
-  // section is as tall as the horizontal travel (plus a viewport) so pacing matches
+  // Section is as tall as the horizontal travel (plus a viewport) so 1px of
+  // vertical scroll ≈ 1px of horizontal travel.
   const height = `calc(100vh + ${distance}px)`;
 
   return (
@@ -58,7 +68,7 @@ export function HorizontalScroll({
         <motion.div
           ref={trackRef}
           style={{ x }}
-          className="flex w-max items-stretch gap-6 px-6 md:gap-8 md:px-10"
+          className="flex w-max items-stretch gap-5 px-6 md:px-10"
         >
           {children}
         </motion.div>

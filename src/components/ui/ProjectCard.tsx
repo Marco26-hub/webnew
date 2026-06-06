@@ -80,7 +80,7 @@ export function ProjectCard({
           {/* engineering grid */}
           <div className="absolute inset-0 bg-grid opacity-[0.18]" />
           {/* ghost metric */}
-          <span className="pointer-events-none absolute right-3 top-1 select-none font-mono text-[5.5rem] font-semibold leading-none tracking-tighter text-white/10">
+          <span className="pointer-events-none absolute right-3 top-1 select-none font-mono text-[4.5rem] font-semibold leading-none tracking-tighter text-white/10">
             {project.metric}
           </span>
           {/* grain */}
@@ -102,7 +102,7 @@ export function ProjectCard({
 
           {/* metric */}
           <div className="absolute bottom-5 left-5">
-            <p className="text-5xl font-semibold tracking-tight text-white drop-shadow-sm md:text-6xl">
+            <p className="text-4xl font-semibold tracking-tight text-white drop-shadow-sm md:text-5xl">
               {project.metric}
             </p>
             <p className="mt-1 font-mono text-[0.7rem] uppercase tracking-widest text-white/75">

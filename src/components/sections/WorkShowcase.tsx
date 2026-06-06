@@ -31,12 +31,12 @@ export function WorkShowcase() {
           key={project.slug}
           project={project}
           index={i}
-          className="w-[82vw] shrink-0 sm:w-[460px] md:w-[540px]"
+          className="w-[78vw] shrink-0 sm:w-[340px] md:w-[400px]"
         />
       ))}
       <LocalizedLink
         href="/work"
-        className="group flex w-[60vw] shrink-0 flex-col justify-center sm:w-[300px]"
+        className="group flex w-[62vw] shrink-0 flex-col justify-center sm:w-[240px]"
       >
         <div className="panel grid aspect-[4/3] place-items-center rounded-2xl transition-colors duration-300 group-hover:border-accent/60">
           <div className="text-center">
