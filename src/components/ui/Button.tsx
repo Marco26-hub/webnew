@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Magnetic } from "./Magnetic";
+import { LocalizedLink } from "./LocalizedLink";
 import { ArrowUpRight } from "./Icons";
 
 type Variant = "primary" | "secondary" | "ghost";
@@ -35,15 +35,7 @@ const variants: Record<Variant, string> = {
   ghost: "text-muted hover:text-ink",
 };
 
-function Inner({
-  children,
-  arrow,
-  size = "md",
-}: {
-  children: ReactNode;
-  arrow?: boolean;
-  size?: Size;
-}) {
+function Inner({ children, arrow }: { children: ReactNode; arrow?: boolean }) {
   return (
     <>
       <span className="relative z-10">{children}</span>
@@ -74,11 +66,9 @@ export function Button({
   const classes = cn(base, sizes[size], variants[variant], className);
 
   const content = href ? (
-    <Link href={href} className={classes}>
-      <Inner arrow={arrow} size={size}>
-        {children}
-      </Inner>
-    </Link>
+    <LocalizedLink href={href} className={classes}>
+      <Inner arrow={arrow}>{children}</Inner>
+    </LocalizedLink>
   ) : (
     <button
       type={type}
@@ -86,9 +76,7 @@ export function Button({
       disabled={disabled}
       className={classes}
     >
-      <Inner arrow={arrow} size={size}>
-        {children}
-      </Inner>
+      <Inner arrow={arrow}>{children}</Inner>
     </button>
   );
 

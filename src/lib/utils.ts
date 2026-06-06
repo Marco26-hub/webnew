@@ -30,3 +30,17 @@ export function mapRange(
 export function pad(n: number) {
   return String(n).padStart(2, "0");
 }
+
+/** Prefix an internal path with the active locale (passes external/anchor hrefs through). */
+export function localePath(lang: string, path: string) {
+  if (
+    !path ||
+    path.startsWith("http") ||
+    path.startsWith("mailto:") ||
+    path.startsWith("#")
+  ) {
+    return path;
+  }
+  const clean = path === "/" ? "" : path;
+  return `/${lang}${clean}`;
+}

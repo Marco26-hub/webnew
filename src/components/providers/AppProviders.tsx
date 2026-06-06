@@ -4,16 +4,17 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useState,
   type ReactNode,
 } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { dictionaries, type Dict, type Lang, type Theme } from "@/lib/i18n";
 
 /* ------------------------------------------------------------
-   Theme + language context. Initial values come from the server
-   (read from cookies in the root layout) so there's no flash and
-   no hydration mismatch. Switching updates state instantly,
-   persists a cookie, and syncs the <html> element.
+   Theme + language context. With localized routes, `lang` comes
+   from the [lang] route segment (passed by the layout). Switching
+   language navigates to the same path under the new locale.
    ------------------------------------------------------------ */
 
 type I18nValue = { lang: Lang; setLang: (l: Lang) => void; t: Dict };
@@ -40,14 +41,25 @@ export function AppProviders({
   initialLang: Lang;
   initialTheme: Theme;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [lang, setLangState] = useState<Lang>(initialLang);
   const [theme, setThemeState] = useState<Theme>(initialTheme);
 
-  const setLang = useCallback((l: Lang) => {
-    setLangState(l);
-    persist("lang", l);
-    if (typeof document !== "undefined") document.documentElement.lang = l;
-  }, []);
+  // Keep context in sync when the route's locale segment changes.
+  useEffect(() => {
+    setLangState(initialLang);
+  }, [initialLang]);
+
+  const setLang = useCallback(
+    (l: Lang) => {
+      persist("lang", l);
+      setLangState(l);
+      const rest = (pathname ?? "/").replace(/^\/(it|en)(?=\/|$)/, "");
+      router.push(`/${l}${rest || ""}`);
+    },
+    [pathname, router],
+  );
 
   const setTheme = useCallback((next: Theme) => {
     setThemeState(next);

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalizedLink } from "@/components/ui/LocalizedLink";
 import { motion } from "framer-motion";
 import { site } from "@/lib/content";
 import { useI18n } from "@/components/providers/AppProviders";
@@ -46,12 +46,12 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5">
               {t.nav.items.map((item) => (
                 <li key={item.href}>
-                  <Link
+                  <LocalizedLink
                     href={item.href}
                     className="text-sm text-muted transition-colors hover:text-ink"
                   >
                     {item.label}
-                  </Link>
+                  </LocalizedLink>
                 </li>
               ))}
             </ul>

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalizedLink } from "./LocalizedLink";
 import { motion } from "framer-motion";
 import type { Dict } from "@/lib/i18n";
 import { cn, pad } from "@/lib/utils";
@@ -65,7 +65,7 @@ export function ProjectCard({
       transition={{ type: "spring", stiffness: 260, damping: 24 }}
       className={cn("group", className)}
     >
-      <Link href={`/work/${project.slug}`} className="block">
+      <LocalizedLink href={`/work/${project.slug}`} className="block">
         <div className="panel relative aspect-[4/3] overflow-hidden rounded-2xl">
           <Preview project={project} />
           <div className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-base/60 backdrop-blur-md transition-colors duration-300 group-hover:bg-accent group-hover:text-ink-inverse">
@@ -93,7 +93,7 @@ export function ProjectCard({
             {project.year}
           </span>
         </div>
-      </Link>
+      </LocalizedLink>
     </motion.div>
   );
 }

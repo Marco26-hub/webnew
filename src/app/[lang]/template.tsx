@@ -3,10 +3,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 
-/**
- * Per-navigation enter transition. template.tsx remounts on every route
- * change, so each page fades/lifts in without interrupting the experience.
- */
+/** Per-navigation enter transition; remounts on each route change. */
 export default function Template({ children }: { children: ReactNode }) {
   return (
     <motion.div

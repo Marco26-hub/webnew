@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useI18n } from "@/components/providers/AppProviders";
 import { caseStudies, caseLabels } from "@/lib/caseStudies";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowRight } from "@/components/ui/Icons";
+import { LocalizedLink } from "@/components/ui/LocalizedLink";
 import { cn } from "@/lib/utils";
 
 export function CaseStudyScreen({ slug }: { slug: string }) {
@@ -15,7 +15,6 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
   const cs = caseStudies[lang][slug];
   const labels = caseLabels[lang];
 
-  // Guarded server-side; this is belt-and-braces.
   if (!project || !cs) return null;
 
   const next = items[(idx + 1) % items.length];
@@ -35,13 +34,13 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
       <header className="relative overflow-hidden pb-12 pt-36 md:pt-48">
         <div className="pointer-events-none absolute inset-0 bg-grid" />
         <div className="shell relative">
-          <Link
+          <LocalizedLink
             href="/work"
             className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
           >
             <span aria-hidden>←</span>
             {labels.back}
-          </Link>
+          </LocalizedLink>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <p className="eyebrow">{project.category}</p>
             <span className="rounded-full border border-line-bright px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-wide text-faint">
@@ -57,7 +56,6 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
         </div>
       </header>
 
-      {/* banner */}
       <div className="shell">
         <div className="panel relative aspect-[21/9] overflow-hidden rounded-3xl">
           <div
@@ -80,7 +78,6 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {/* meta */}
       <section className="shell mt-12 grid grid-cols-2 gap-6 border-y border-line py-8 md:grid-cols-3">
         {meta.map((m) => (
           <div key={m.k}>
@@ -92,7 +89,6 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
         ))}
       </section>
 
-      {/* narrative */}
       <section className="shell py-20 md:py-28">
         <div className="mx-auto grid max-w-4xl gap-14">
           {narrative.map((n, i) => (
@@ -125,9 +121,8 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
         </div>
       </section>
 
-      {/* next project */}
       <section className="border-t border-line">
-        <Link href={`/work/${next.slug}`} className="group block">
+        <LocalizedLink href={`/work/${next.slug}`} className="group block">
           <div className="shell flex items-center justify-between gap-6 py-16 md:py-24">
             <div>
               <p className="font-mono text-xs uppercase tracking-widest text-faint">
@@ -139,7 +134,7 @@ export function CaseStudyScreen({ slug }: { slug: string }) {
             </div>
             <ArrowRight className="h-8 w-8 shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-2" />
           </div>
-        </Link>
+        </LocalizedLink>
       </section>
     </article>
   );

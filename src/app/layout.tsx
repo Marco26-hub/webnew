@@ -7,15 +7,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import { site } from "@/lib/content";
-import { dictionaries, isLang, isTheme, type Lang, type Theme } from "@/lib/i18n";
-import { AppProviders } from "@/components/providers/AppProviders";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { CustomCursor } from "@/components/ui/CustomCursor";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { organizationLd, websiteLd } from "@/lib/structuredData";
+import { dictionaries, isTheme } from "@/lib/i18n";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -25,7 +17,12 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-// Italian is the primary/canonical language for indexing (Phase A).
+// Locale comes from the middleware header and theme from a cookie, both
+// request-time — render dynamically so <html lang> and theme are correct.
+export const dynamic = "force-dynamic";
+
+// Italian is the primary/canonical language; per-page generateMetadata adds
+// localized titles + hreflang alternates.
 const brand = dictionaries.it.brand;
 
 export const metadata: Metadata = {
@@ -51,7 +48,6 @@ export const metadata: Metadata = {
     title: `${site.name} — ${brand.tagline}`,
     description: brand.description,
     siteName: site.name,
-    url: `https://${site.domain}`,
     locale: "it_IT",
     alternateLocale: ["en_US"],
   },
@@ -70,28 +66,13 @@ export const viewport: Viewport = {
   ],
 };
 
-/** Italian is the default (primary) language; English browsers still auto-switch. */
-async function resolvePrefs(): Promise<{ lang: Lang; theme: Theme }> {
-  const cookieStore = await cookies();
-  const cookieLang = cookieStore.get("lang")?.value;
-  const cookieTheme = cookieStore.get("theme")?.value;
-
-  let lang: Lang = "it";
-  if (isLang(cookieLang)) {
-    lang = cookieLang;
-  } else {
-    const accept = (await headers()).get("accept-language")?.toLowerCase() ?? "";
-    if (accept.startsWith("en") || /\ben\b/.test(accept)) lang = "en";
-  }
-
-  const theme: Theme = isTheme(cookieTheme) ? cookieTheme : "dark";
-  return { lang, theme };
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { lang, theme } = await resolvePrefs();
+  const xLocale = (await headers()).get("x-locale");
+  const lang = xLocale === "en" ? "en" : "it";
+  const cookieTheme = (await cookies()).get("theme")?.value;
+  const theme = isTheme(cookieTheme) ? cookieTheme : "dark";
 
   return (
     <html
@@ -102,19 +83,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased">
-        <AppProviders initialLang={lang} initialTheme={theme}>
-          <SmoothScroll>
-            <ScrollProgress />
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScroll>
-          <CustomCursor />
-        </AppProviders>
+        {children}
         <Analytics />
         <SpeedInsights />
-        <JsonLd data={organizationLd("it")} />
-        <JsonLd data={websiteLd("it")} />
       </body>
     </html>
   );

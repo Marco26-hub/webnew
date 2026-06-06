@@ -2,12 +2,12 @@ import { dictionaries } from "@/lib/i18n";
 import { site } from "@/lib/content";
 
 // GEO: a Markdown summary for AI answer engines. Generated from the primary
-// dictionary so it stays in sync with the site. Served at /llms.txt.
+// (Italian) dictionary so it stays in sync. Served at /llms.txt.
 export const dynamic = "force-static";
 
 export function GET() {
   const d = dictionaries.it;
-  const base = `https://${site.domain}`;
+  const base = `https://${site.domain}/it`;
   const lines: string[] = [];
 
   lines.push(`# ${site.name}`, "");

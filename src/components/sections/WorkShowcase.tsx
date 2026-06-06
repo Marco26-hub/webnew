@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalizedLink } from "@/components/ui/LocalizedLink";
 import { useI18n } from "@/components/providers/AppProviders";
 import { HorizontalScroll } from "@/components/scroll/HorizontalScroll";
 import { ProjectCard } from "@/components/ui/ProjectCard";
@@ -34,7 +34,7 @@ export function WorkShowcase() {
           className="w-[82vw] shrink-0 sm:w-[460px] md:w-[540px]"
         />
       ))}
-      <Link
+      <LocalizedLink
         href="/work"
         className="group flex w-[60vw] shrink-0 flex-col justify-center sm:w-[300px]"
       >
@@ -46,7 +46,7 @@ export function WorkShowcase() {
             <p className="mt-4 text-lg font-medium">{t.work.viewAll}</p>
           </div>
         </div>
-      </Link>
+      </LocalizedLink>
     </HorizontalScroll>
   );
 }

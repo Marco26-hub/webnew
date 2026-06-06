@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
@@ -11,16 +10,17 @@ import {
 } from "framer-motion";
 import { site } from "@/lib/content";
 import { useI18n } from "@/components/providers/AppProviders";
-import { cn } from "@/lib/utils";
+import { cn, localePath } from "@/lib/utils";
 import { Logo, ArrowUpRight } from "@/components/ui/Icons";
 import { Button } from "@/components/ui/Button";
 import { Magnetic } from "@/components/ui/Magnetic";
+import { LocalizedLink } from "@/components/ui/LocalizedLink";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { LangSwitch } from "@/components/ui/LangSwitch";
 
 export function Navbar() {
   const pathname = usePathname();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
@@ -50,7 +50,7 @@ export function Navbar() {
                 : "border-transparent bg-transparent",
             )}
           >
-            <Link
+            <LocalizedLink
               href="/"
               className="group flex items-center gap-2.5 pl-1.5"
               aria-label={`${site.name} — home`}
@@ -59,13 +59,13 @@ export function Navbar() {
               <span className="text-[0.95rem] font-semibold tracking-tight">
                 {site.name}
               </span>
-            </Link>
+            </LocalizedLink>
 
             <nav className="hidden items-center gap-1 md:flex">
               {t.nav.items.map((item) => {
-                const active = pathname === item.href;
+                const active = pathname === localePath(lang, item.href);
                 return (
-                  <Link
+                  <LocalizedLink
                     key={item.href}
                     href={item.href}
                     className={cn(
@@ -85,7 +85,7 @@ export function Navbar() {
                       />
                     )}
                     {item.label}
-                  </Link>
+                  </LocalizedLink>
                 );
               })}
             </nav>
@@ -126,7 +126,6 @@ export function Navbar() {
         </div>
       </motion.header>
 
-      {/* mobile overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -144,7 +143,7 @@ export function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.08 * i + 0.1, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <Link
+                  <LocalizedLink
                     href={item.href}
                     onClick={() => setOpen(false)}
                     className="group flex items-center justify-between border-b border-line py-5"
@@ -153,7 +152,7 @@ export function Navbar() {
                       {item.label}
                     </span>
                     <ArrowUpRight className="h-6 w-6 text-muted transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent" />
-                  </Link>
+                  </LocalizedLink>
                 </motion.div>
               ))}
               <div className="mt-8 flex items-center justify-between">
