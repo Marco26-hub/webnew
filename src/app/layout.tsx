@@ -35,6 +35,11 @@ export const metadata: Metadata = {
   keywords: [
     "automazioni AI",
     "AI automation agency",
+    "segretaria AI 24/7",
+    "AI receptionist",
+    "centralino AI",
+    "prenotazione appuntamenti AI",
+    "voice agent",
     "agenzia siti web",
     "e-commerce AI",
     "sistemi multi-agente",

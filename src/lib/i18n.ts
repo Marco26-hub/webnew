@@ -12,9 +12,9 @@ export type Theme = "dark" | "light";
 
 const en = {
   brand: {
-    tagline: "AI automation, websites and growth — done for you.",
+    tagline: "Put AI to work across your business.",
     description:
-      "Aether is an AI studio. We build automations and multi-agent systems, design websites and e-commerce, and run growth — SEO/GEO, lead research and social automation — for small businesses and enterprise teams.",
+      "Aether is an AI studio for ambitious businesses. We build automations and multi-agent systems, a 24/7 AI receptionist that answers calls and books appointments, high-converting websites and e-commerce, and growth — SEO, GEO, lead generation and social automation.",
     location: "Milan · New York · Remote",
   },
   nav: {
@@ -27,11 +27,11 @@ const en = {
     cta: "Start a project",
   },
   hero: {
-    badge: "AI studio · Automation, web & growth",
+    badge: "AI studio · Automation · Web · Growth",
     line1: "We put AI",
     line2serif: "to work",
     line2rest: "for your business.",
-    sub: "builds AI automations, websites & e-commerce, multi-agent systems and growth — SEO/GEO, leads and social — for small businesses and enterprise teams.",
+    sub: "puts AI to work across your business — automations and multi-agent systems, a 24/7 AI receptionist that answers every call and books appointments, websites and e-commerce, and growth that compounds.",
     ctaPrimary: "Start a project",
     ctaSecondary: "Explore services",
     scroll: "Scroll",
@@ -40,10 +40,10 @@ const en = {
   manifesto: {
     eyebrow: "Our thesis",
     lines: [
-      "Most teams don't need more software.",
-      "They need the busywork to disappear.",
-      "So we automate it — and build the site and pipeline around it.",
-      "Quietly, reliably, on brand.",
+      "Most businesses don't need more tools.",
+      "They need the repetitive work to stop.",
+      "So we automate it — calls answered, appointments booked, follow-ups sent —",
+      "while you do the work that matters.",
     ],
   },
   chaos: {
@@ -69,16 +69,23 @@ const en = {
         index: 1,
         title: "AI Automation & Agents",
         summary:
-          "We hand the repetitive work to AI — agents and automations that run your operations 24/7.",
+          "We hand the repetitive work to AI — a 24/7 receptionist, agents and automations that run your operations while you sleep.",
         detail:
-          "From single-task automations to multi-agent systems that reason, use your tools and act, we remove the manual work that slows your team down — observable and under control.",
+          "From a voice agent that answers every call and books appointments, to multi-agent systems that reason and act, to bespoke automations, we remove the manual work that slows your business down — observable, reliable and under control.",
         services: [
+          {
+            id: "receptionist",
+            title: "24/7 AI receptionist",
+            outcome: "Never miss a call",
+            blurb:
+              "A voice agent that answers every call day and night, qualifies the caller and books appointments straight into your calendar.",
+          },
           {
             id: "automations",
             title: "Custom AI automations",
             outcome: "Hours back every week",
             blurb:
-              "We automate the repetitive workflows draining your team — data, docs, ops, follow-ups.",
+              "We automate the repetitive workflows draining your team — data, documents, operations, follow-ups.",
           },
           {
             id: "multiagent",
@@ -318,7 +325,7 @@ const en = {
     { value: "10+ hrs", label: "saved per week, per automated workflow" },
     { value: "+34%", label: "median conversion lift on sites we rebuild" },
     { value: "3.2×", label: "more qualified leads from automated research" },
-    { value: "24/7", label: "agents and automations running your operations" },
+    { value: "24/7", label: "AI reception — every call answered, every appointment booked" },
   ],
   faq: {
     eyebrow: "FAQ",
@@ -327,7 +334,11 @@ const en = {
     items: [
       {
         q: "What does Aether actually do?",
-        a: "We build AI automations and multi-agent systems, design websites and e-commerce, and run growth — SEO/GEO, lead research and social automation — for small businesses and enterprise teams.",
+        a: "We build AI automations and multi-agent systems, a 24/7 AI receptionist that answers calls and books appointments, websites and e-commerce, and growth — SEO, GEO, lead generation and social automation — for small businesses and enterprise teams.",
+      },
+      {
+        q: "Can AI really answer our phone and book appointments?",
+        a: "Yes. Our 24/7 AI receptionist answers every call in a natural voice, understands the request, qualifies the caller and books the appointment directly into your calendar — handing off to a human when it should. You stop losing customers to missed calls.",
       },
       {
         q: "Do you work with small businesses?",
@@ -353,8 +364,8 @@ const en = {
   },
   footer: {
     eyebrow: "Let's build",
-    headingA: "Have work worth",
-    headingB: "automating?",
+    headingA: "Ready to let AI",
+    headingB: "do the work?",
     cta: "Start a project",
     sitemap: "Sitemap",
     social: "Social",
@@ -365,7 +376,7 @@ const en = {
     headerEyebrow: "Services",
     headerTitle: "Automation, web and growth — under one roof.",
     headerDesc:
-      "Four pillars, nine services. Take one, or run them as a single growth engine — for SMBs and enterprise teams alike.",
+      "Four pillars, one growth engine. Take a single service or run them together — for small businesses and enterprise teams alike.",
   },
   about: {
     headerEyebrow: "About",
@@ -454,9 +465,9 @@ const en = {
 
 const it: typeof en = {
   brand: {
-    tagline: "Automazioni AI, siti e crescita — chiavi in mano.",
+    tagline: "Metti l'AI al lavoro in tutta l'azienda.",
     description:
-      "Aether è uno studio AI. Costruiamo automazioni e sistemi multi-agente, progettiamo siti ed e-commerce e gestiamo la crescita — SEO/GEO, ricerca lead e automazione social — per piccole imprese e team enterprise.",
+      "Aether è uno studio AI per aziende ambiziose. Costruiamo automazioni e sistemi multi-agente, una segretaria AI 24/7 che risponde alle chiamate e fissa gli appuntamenti, siti ed e-commerce ad alta conversione e crescita — SEO, GEO, lead generation e automazione social.",
     location: "Milano · New York · Da remoto",
   },
   nav: {
@@ -469,11 +480,11 @@ const it: typeof en = {
     cta: "Inizia un progetto",
   },
   hero: {
-    badge: "Studio AI · Automazione, web & crescita",
+    badge: "Studio AI · Automazione · Web · Crescita",
     line1: "Mettiamo l'AI",
     line2serif: "al lavoro",
     line2rest: "per la tua azienda.",
-    sub: "costruisce automazioni AI, siti ed e-commerce, sistemi multi-agente e crescita — SEO/GEO, lead e social — per piccole imprese e team enterprise.",
+    sub: "mette l'AI al lavoro in tutta la tua azienda — automazioni e sistemi multi-agente, una segretaria AI 24/7 che risponde a ogni chiamata e fissa gli appuntamenti, siti ed e-commerce, e una crescita che si accumula.",
     ctaPrimary: "Inizia un progetto",
     ctaSecondary: "Esplora i servizi",
     scroll: "Scorri",
@@ -482,10 +493,10 @@ const it: typeof en = {
   manifesto: {
     eyebrow: "La nostra tesi",
     lines: [
-      "Alla maggior parte dei team non serve altro software.",
-      "Serve che il lavoro ripetitivo sparisca.",
-      "Così lo automatizziamo — e ci costruiamo intorno sito e pipeline.",
-      "In modo silenzioso, affidabile, on brand.",
+      "Alla maggior parte delle aziende non servono altri strumenti.",
+      "Serve che il lavoro ripetitivo, semplicemente, smetta.",
+      "Così lo automatizziamo — chiamate risposte, appuntamenti fissati, follow-up inviati —",
+      "mentre tu fai il lavoro che conta.",
     ],
   },
   chaos: {
@@ -511,10 +522,17 @@ const it: typeof en = {
         index: 1,
         title: "Automazioni AI & Agenti",
         summary:
-          "Affidiamo il lavoro ripetitivo all'AI — agenti e automazioni che mandano avanti le operazioni 24/7.",
+          "Affidiamo il lavoro ripetitivo all'AI — una segretaria 24/7, agenti e automazioni che mandano avanti le operazioni mentre dormi.",
         detail:
-          "Dalle automazioni di singoli task ai sistemi multi-agente che ragionano, usano i tuoi strumenti e agiscono, togliamo il lavoro manuale che rallenta il team — osservabile e sotto controllo.",
+          "Da un agente vocale che risponde a ogni chiamata e fissa gli appuntamenti, ai sistemi multi-agente che ragionano e agiscono, fino alle automazioni su misura, togliamo il lavoro manuale che rallenta l'azienda — osservabile, affidabile e sotto controllo.",
         services: [
+          {
+            id: "receptionist",
+            title: "Segretaria AI 24/7",
+            outcome: "Mai più una chiamata persa",
+            blurb:
+              "Un agente vocale che risponde a ogni chiamata giorno e notte, qualifica chi chiama e fissa gli appuntamenti direttamente in agenda.",
+          },
           {
             id: "automations",
             title: "Automazioni AI su misura",
@@ -760,7 +778,7 @@ const it: typeof en = {
     { value: "10+ h", label: "risparmiate a settimana per ogni flusso automatizzato" },
     { value: "+34%", label: "aumento mediano di conversione sui siti che rifacciamo" },
     { value: "3,2×", label: "lead qualificati in più dalla ricerca automatizzata" },
-    { value: "24/7", label: "agenti e automazioni che mandano avanti le operazioni" },
+    { value: "24/7", label: "reception AI — ogni chiamata risposta, ogni appuntamento fissato" },
   ],
   faq: {
     eyebrow: "FAQ",
@@ -769,7 +787,11 @@ const it: typeof en = {
     items: [
       {
         q: "Di cosa si occupa esattamente Aether?",
-        a: "Costruiamo automazioni AI e sistemi multi-agente, progettiamo siti ed e-commerce e gestiamo la crescita — SEO/GEO, ricerca lead e automazione social — per piccole imprese e team enterprise.",
+        a: "Costruiamo automazioni AI e sistemi multi-agente, una segretaria AI 24/7 che risponde alle chiamate e fissa gli appuntamenti, siti ed e-commerce e crescita — SEO, GEO, lead generation e automazione social — per piccole imprese e team enterprise.",
+      },
+      {
+        q: "L'AI può davvero rispondere al telefono e fissare appuntamenti?",
+        a: "Sì. La nostra segretaria AI 24/7 risponde a ogni chiamata con voce naturale, capisce la richiesta, qualifica chi chiama e fissa l'appuntamento direttamente in agenda — passando a una persona quando serve. Smetti di perdere clienti per le chiamate non risposte.",
       },
       {
         q: "Lavorate con le piccole imprese?",
@@ -795,8 +817,8 @@ const it: typeof en = {
   },
   footer: {
     eyebrow: "Costruiamo",
-    headingA: "Hai un lavoro che vale",
-    headingB: "la pena automatizzare?",
+    headingA: "Pronto a far fare",
+    headingB: "il lavoro all'AI?",
     cta: "Inizia un progetto",
     sitemap: "Mappa del sito",
     social: "Social",
@@ -807,7 +829,7 @@ const it: typeof en = {
     headerEyebrow: "Servizi",
     headerTitle: "Automazione, web e crescita — sotto un solo tetto.",
     headerDesc:
-      "Quattro pilastri, nove servizi. Prendine uno, o falli girare come un unico motore di crescita — per PMI e team enterprise.",
+      "Quattro pilastri, un solo motore di crescita. Prendi un singolo servizio o falli girare insieme — per piccole imprese e team enterprise.",
   },
   about: {
     headerEyebrow: "Studio",
