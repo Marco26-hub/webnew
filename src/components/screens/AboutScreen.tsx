@@ -6,6 +6,7 @@ import { Manifesto } from "@/components/sections/Manifesto";
 import { Stats } from "@/components/sections/Stats";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { SpotlightTilt } from "@/components/ui/SpotlightTilt";
 
 export function AboutScreen() {
   const { t } = useI18n();
@@ -55,12 +56,15 @@ export function AboutScreen() {
           {t.about.team.map((m, i) => (
             <Reveal key={m.name} delay={i * 0.06}>
               <div className="group">
-                <div className="relative grid aspect-square place-items-center overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-elevated to-surface">
+                <SpotlightTilt
+                  tilt={8}
+                  className="grid aspect-square place-items-center rounded-2xl border border-line bg-gradient-to-br from-elevated to-surface"
+                >
                   <div className="absolute inset-0 bg-grid opacity-30" />
-                  <span className="relative font-serif text-5xl text-glow transition-transform duration-500 group-hover:scale-110">
+                  <span className="relative z-10 font-serif text-5xl text-glow transition-transform duration-500 group-hover:scale-110">
                     {m.initials}
                   </span>
-                </div>
+                </SpotlightTilt>
                 <h3 className="mt-4 text-base font-medium">{m.name}</h3>
                 <p className="text-sm text-muted">{m.role}</p>
               </div>
