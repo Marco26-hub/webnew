@@ -4,17 +4,25 @@ import { motion } from "framer-motion";
 import { useI18n } from "@/components/providers/AppProviders";
 import { cn, pad } from "@/lib/utils";
 
-// Asymmetric bento: wide / narrow / narrow / wide.
-const spans = ["md:col-span-2", "md:col-span-1", "md:col-span-1", "md:col-span-2"];
+// Mobile-first: a single stacked column on phones; a 6-col bento on desktop.
+// Spans sum to 6 per row → [3,3] then [2,2,2].
+const spans = [
+  "md:col-span-3",
+  "md:col-span-3",
+  "md:col-span-2",
+  "md:col-span-2",
+  "md:col-span-2",
+];
 
 export function ServicesBento() {
   const { t } = useI18n();
 
   return (
     <section className="shell pb-8">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-6">
         {t.pillars.items.map((p, i) => {
-          const wide = spans[i] === "md:col-span-2";
+          const span = spans[i] ?? "md:col-span-2";
+          const wide = span === "md:col-span-3";
           return (
             <motion.div
               key={p.id}
@@ -28,8 +36,8 @@ export function ServicesBento() {
                 ease: [0.16, 1, 0.3, 1],
               }}
               className={cn(
-                "panel group scroll-mt-28 rounded-3xl p-7 transition-colors duration-300 hover:border-accent/50 md:p-8",
-                spans[i] ?? "md:col-span-1",
+                "panel group scroll-mt-28 rounded-3xl p-6 transition-colors duration-300 hover:border-accent/50 md:p-8",
+                span,
               )}
             >
               <div className="flex items-center gap-3">
@@ -44,12 +52,7 @@ export function ServicesBento() {
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
                 {p.summary}
               </p>
-              <div
-                className={cn(
-                  "mt-7 grid gap-4",
-                  wide && "sm:grid-cols-2",
-                )}
-              >
+              <div className={cn("mt-7 grid gap-4", wide && "sm:grid-cols-2")}>
                 {p.services.map((s) => (
                   <div
                     key={s.id}

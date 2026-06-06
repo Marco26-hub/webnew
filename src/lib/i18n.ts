@@ -60,7 +60,7 @@ const en = {
   },
   pillars: {
     eyebrow: "What we do",
-    titleA: "Four pillars,",
+    titleA: "Five pillars,",
     titleB: "one growth engine.",
     core: "core",
     items: [
@@ -69,17 +69,10 @@ const en = {
         index: 1,
         title: "AI Automation & Agents",
         summary:
-          "We hand the repetitive work to AI — a 24/7 receptionist, agents and automations that run your operations while you sleep.",
+          "We hand the repetitive work to AI — agents and automations that run your operations while you sleep.",
         detail:
-          "From a voice agent that answers every call and books appointments, to multi-agent systems that reason and act, to bespoke automations, we remove the manual work that slows your business down — observable, reliable and under control.",
+          "From multi-agent systems that reason, use your tools and act, to bespoke automations, we remove the manual work that slows your business down — observable, reliable and under control.",
         services: [
-          {
-            id: "receptionist",
-            title: "24/7 AI receptionist",
-            outcome: "Never miss a call",
-            blurb:
-              "A voice agent that answers every call day and night, qualifies the caller and books appointments straight into your calendar.",
-          },
           {
             id: "automations",
             title: "Custom AI automations",
@@ -104,8 +97,40 @@ const en = {
         ],
       },
       {
-        id: "web",
+        id: "voice",
         index: 2,
+        title: "AI Voice & Reception",
+        summary:
+          "A 24/7 AI receptionist that answers every call, qualifies the caller and books appointments — so you never miss business.",
+        detail:
+          "Your phone, answered around the clock in a natural voice. The agent understands the request, qualifies the caller, books appointments straight into your calendar and hands off to a human when it should — no more missed calls, no more voicemail tag.",
+        services: [
+          {
+            id: "call-answering",
+            title: "24/7 call answering",
+            outcome: "Never miss a call",
+            blurb:
+              "A natural-voice agent answers every call, day and night, weekends included.",
+          },
+          {
+            id: "appointment-booking",
+            title: "Appointment booking",
+            outcome: "Calendar, filled",
+            blurb:
+              "It books appointments straight into your calendar and confirms with the caller.",
+          },
+          {
+            id: "qualification",
+            title: "Qualification & hand-off",
+            outcome: "Right call, right person",
+            blurb:
+              "It qualifies each caller and routes or escalates to a human when it matters.",
+          },
+        ],
+      },
+      {
+        id: "web",
+        index: 3,
         title: "Websites & E-commerce",
         summary:
           "Sites that look premium and sell — from a sharp landing page to an AI-automated store.",
@@ -137,7 +162,7 @@ const en = {
       },
       {
         id: "social",
-        index: 3,
+        index: 4,
         title: "Social, automated",
         summary:
           "Show up consistently on social — and run it all from your own site's admin.",
@@ -162,7 +187,7 @@ const en = {
       },
       {
         id: "growth",
-        index: 4,
+        index: 5,
         title: "Visibility & Growth",
         summary:
           "Get found — by Google and by AI — and turn attention into qualified leads.",
@@ -376,7 +401,7 @@ const en = {
     headerEyebrow: "Services",
     headerTitle: "Automation, web and growth — under one roof.",
     headerDesc:
-      "Four pillars, one growth engine. Take a single service or run them together — for small businesses and enterprise teams alike.",
+      "Five pillars, one growth engine. Take a single service or run them together — for small businesses and enterprise teams alike.",
   },
   about: {
     headerEyebrow: "About",
@@ -513,7 +538,7 @@ const it: typeof en = {
   },
   pillars: {
     eyebrow: "Cosa facciamo",
-    titleA: "Quattro pilastri,",
+    titleA: "Cinque pilastri,",
     titleB: "un solo motore di crescita.",
     core: "core",
     items: [
@@ -522,17 +547,10 @@ const it: typeof en = {
         index: 1,
         title: "Automazioni AI & Agenti",
         summary:
-          "Affidiamo il lavoro ripetitivo all'AI — una segretaria 24/7, agenti e automazioni che mandano avanti le operazioni mentre dormi.",
+          "Affidiamo il lavoro ripetitivo all'AI — agenti e automazioni che mandano avanti le operazioni mentre dormi.",
         detail:
-          "Da un agente vocale che risponde a ogni chiamata e fissa gli appuntamenti, ai sistemi multi-agente che ragionano e agiscono, fino alle automazioni su misura, togliamo il lavoro manuale che rallenta l'azienda — osservabile, affidabile e sotto controllo.",
+          "Dai sistemi multi-agente che ragionano, usano i tuoi strumenti e agiscono, fino alle automazioni su misura, togliamo il lavoro manuale che rallenta l'azienda — osservabile, affidabile e sotto controllo.",
         services: [
-          {
-            id: "receptionist",
-            title: "Segretaria AI 24/7",
-            outcome: "Mai più una chiamata persa",
-            blurb:
-              "Un agente vocale che risponde a ogni chiamata giorno e notte, qualifica chi chiama e fissa gli appuntamenti direttamente in agenda.",
-          },
           {
             id: "automations",
             title: "Automazioni AI su misura",
@@ -557,8 +575,40 @@ const it: typeof en = {
         ],
       },
       {
-        id: "web",
+        id: "voice",
         index: 2,
+        title: "Voce & Reception AI",
+        summary:
+          "Una segretaria AI 24/7 che risponde a ogni chiamata, qualifica chi chiama e fissa gli appuntamenti — così non perdi più clienti.",
+        detail:
+          "Il tuo telefono, risposto 24 ore su 24 con voce naturale. L'agente capisce la richiesta, qualifica chi chiama, fissa gli appuntamenti direttamente in agenda e passa a una persona quando serve — niente più chiamate perse, niente rincorse in segreteria.",
+        services: [
+          {
+            id: "call-answering",
+            title: "Risposta chiamate 24/7",
+            outcome: "Mai più una chiamata persa",
+            blurb:
+              "Un agente con voce naturale risponde a ogni chiamata, giorno e notte, weekend inclusi.",
+          },
+          {
+            id: "appointment-booking",
+            title: "Prenotazione appuntamenti",
+            outcome: "Agenda piena",
+            blurb:
+              "Fissa gli appuntamenti direttamente in agenda e conferma a chi chiama.",
+          },
+          {
+            id: "qualification",
+            title: "Qualifica & smistamento",
+            outcome: "La chiamata giusta, alla persona giusta",
+            blurb:
+              "Qualifica chi chiama e instrada o passa a una persona quando conta.",
+          },
+        ],
+      },
+      {
+        id: "web",
+        index: 3,
         title: "Siti & E-commerce",
         summary:
           "Siti che sembrano premium e vendono — dalla landing page allo store automatizzato con l'AI.",
@@ -590,7 +640,7 @@ const it: typeof en = {
       },
       {
         id: "social",
-        index: 3,
+        index: 4,
         title: "Social, automatizzati",
         summary:
           "Presenza costante sui social — e gestisci tutto dall'admin del tuo sito.",
@@ -615,7 +665,7 @@ const it: typeof en = {
       },
       {
         id: "growth",
-        index: 4,
+        index: 5,
         title: "Visibilità & Crescita",
         summary:
           "Farti trovare — da Google e dall'AI — e trasformare l'attenzione in lead qualificati.",
@@ -829,7 +879,7 @@ const it: typeof en = {
     headerEyebrow: "Servizi",
     headerTitle: "Automazione, web e crescita — sotto un solo tetto.",
     headerDesc:
-      "Quattro pilastri, un solo motore di crescita. Prendi un singolo servizio o falli girare insieme — per piccole imprese e team enterprise.",
+      "Cinque pilastri, un solo motore di crescita. Prendi un singolo servizio o falli girare insieme — per piccole imprese e team enterprise.",
   },
   about: {
     headerEyebrow: "Studio",

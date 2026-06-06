@@ -49,7 +49,8 @@ function OrbitNode({
   });
   const settle = useTransform(progress, [0.55, 1], [0, 1]);
   const cardOpacity = useTransform(progress, [0.5, 0.92], [0.55, 1]);
-  const cardWidth = useTransform(settle, [0, 1], [180 * scale, 320]);
+  // Scale the settled width with the stage so 5 cards never overflow on mobile.
+  const cardWidth = useTransform(settle, [0, 1], [180 * scale, 320 * scale]);
 
   return (
     <motion.div
