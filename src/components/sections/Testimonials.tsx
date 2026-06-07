@@ -46,7 +46,7 @@ export function Testimonials() {
           <span className="text-muted"> {t.testimonials.headingB}</span>
         </h2>
       </div>
-      <Marquee duration={42} className="mask-fade-x" gap="1.5rem" pauseOnHover>
+      <Marquee duration={42} className="mask-fade-x-wide" gap="1.5rem" pauseOnHover>
         {t.testimonials.items.map((item) => (
           <QuoteCard key={item.name} {...item} />
         ))}

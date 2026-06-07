@@ -7,7 +7,7 @@ export const site = {
   name: "Aether",
   // Used for metadataBase / canonical URLs — set to your production domain.
   domain: "webnew-five.vercel.app",
-  email: "silkincom.business@gmail.com",
+  email: "info@socialwebautomation.com",
   social: [
     { label: "X", href: "https://x.com" },
     { label: "LinkedIn", href: "https://linkedin.com" },

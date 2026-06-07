@@ -364,6 +364,25 @@
     );
   }
 
+  /* Softer, wider edge dissolve for card marquees (cards emerge/disappear
+     gracefully instead of being hard-clipped). */
+  .mask-fade-x-wide {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 16%,
+      #000 84%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 16%,
+      #000 84%,
+      transparent
+    );
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
