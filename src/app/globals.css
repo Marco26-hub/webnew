@@ -86,6 +86,11 @@
     --color-accent: #3fdcff;
     --color-accent-2: #5b8cff;
     --color-accent-3: #8b6cff;
+    /* Re-assert the text color too: forced-dark sections (Hero,
+       ChaosToOrder, ParticleSection) must keep light ink even when the
+       page is in light mode — otherwise inherited text renders dark on
+       dark and becomes unreadable. */
+    color: var(--color-ink);
     color-scheme: dark;
   }
   .light {
