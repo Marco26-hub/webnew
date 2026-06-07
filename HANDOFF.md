@@ -11,6 +11,10 @@ Site is **live and complete** as a bilingual marketing site. Latest work:
 localized `/it`+`/en` routing, 5 service pillars (incl. 24/7 AI receptionist),
 GEO/SEO (JSON-LD, llms.txt, hreflang), premium card effects, native work
 carousel. Everything below under "Architecture/Services" is **done & deployed**.
+The **admin dashboard is now LIVE in production** (Neon + Better Auth, login working).
+Recent tweaks shipped to `main`: official email → `info@socialwebautomation.com`, the
+**Testimonials section was removed**, softer card-marquee edge fade (`.mask-fade-x-wide`),
+and a readability fix so forced-dark sections keep light text in light mode.
 
 ### Open decisions / not yet built (pick up here)
 1. **Pricing / Plans section** — *proposed, not built; awaiting user's model choice.*
@@ -19,19 +23,33 @@ carousel. Everything below under "Architecture/Services" is **done & deployed**.
    Build in IT+EN with `Offer`/`AggregateOffer` JSON-LD. US 2026 MRR benchmarks
    (adapt to EU): AI receptionist $149–299/mo · managed automation retainer
    $500–5k/mo · SEO+GEO $1.5k–10k/mo · social mgmt $2k–7.5k/mo · website care plan.
-2. **Admin dashboard** — ✅ *built* on **Neon Postgres + Drizzle + Better Auth** (replaces the
-   earlier Supabase plan). Leads/Clients/Appointments at `/admin`. Just needs env vars +
-   `npm run db:migrate` + `npm run db:seed`. See "Admin dashboard (implemented)" below.
+2. **Admin dashboard** — ✅ **LIVE in production** on **Neon Postgres + Drizzle + Better Auth**.
+   Leads/Clients/Appointments at `/admin`. Neon project created, schema + first admin seeded,
+   and `DATABASE_URL`/`BETTER_AUTH_SECRET`/`BETTER_AUTH_URL` set on Vercel — login works.
+   See "Admin dashboard (implemented)" below. **Pending:** harden the admin password (a weak one
+   may have been set) and set `CONTACT_TO_EMAIL` so the contact form also emails enquiries.
 3. **Proposed new "trendy" services** (not added) — AI chatbot/support + **WhatsApp Business** automation; **AI ad creatives/UGC**; **GEO/AEO audit** as a low-cost entry offer; **AI Readiness/Automation audit**. Fold into existing pillars if approved.
 4. **Content gaps to consider** — pricing (above), a "who it's for"/segments block, and **real** case studies (current ones are labeled "illustrative example").
 
-### How to push (IMPORTANT — read-only session)
-This environment has **read-only GitHub** (git proxy + GitHub MCP both 403). All
-pushes so far were done by pointing git at `github.com` directly with a
-**user-provided Personal Access Token** pasted in chat:
-`git push "https://<USER>:<PAT>@github.com/Marco26-hub/webnew.git" HEAD:refs/heads/main HEAD:refs/heads/claude/vigilant-goodall-fuIsx`.
-A new session must either have write access granted, or ask the user for a fresh PAT.
-Feature branch: `claude/vigilant-goodall-fuIsx` (kept in sync with `main`).
+### How to push (IMPORTANT — read-only env + network allowlist)
+This managed cloud env is **read-only for git**: the git proxy AND the GitHub MCP both return
+**403 on writes**. Even `git push` to `github.com` directly is intercepted (403). Pushes are
+therefore done via the **GitHub REST / Git-Data API** with a **user-provided fine-grained PAT**
+(scopes: Contents + Pull requests = Read/Write):
+- single file → `PUT /repos/.../contents/<path>` (needs the file's current `sha`);
+- multi-file commit → create blobs → tree (`base_tree` = main's tree) → commit → `PATCH refs/heads/main`.
+⚠️ The local working tree is on `claude/sleepy-pascal-tFOD1` and **diverges from `main`** (pushes
+go straight to `main` via API). Before editing a file to push, **re-sync it from `main`** first
+(`GET .../contents/<path>?ref=main` raw) so you don't revert other API-only changes.
+
+**Network allowlist** (sandbox egress): npm + `api.github.com` work, but **`*.vercel.app`,
+`*.neon.tech`, and browser CDNs (`cdn.playwright.dev`) are BLOCKED**. So this session **cannot**
+reach the live site, the Neon DB, or download a browser. Verify deploys via the **GitHub
+deployments API** (poll Production status for the pushed SHA) and ask the user to confirm visuals.
+To run/seed the DB you must be where Neon is reachable (user's machine, or Neon's SQL editor).
+
+This session's branch: `claude/sleepy-pascal-tFOD1` (PR #1 merged to `main`). The older
+`claude/vigilant-goodall-fuIsx` branch is **stale** (0 commits ahead of `main`) — safe to delete.
 
 ---
 
@@ -99,21 +117,33 @@ portal. Modules: **Leads, Clients, Appointments**. Lives at **`/admin`**, OUTSID
   main entry, which **kysely 0.29.2 moved** to `kysely/migration`. The pin keeps the build green;
   revisit when Better Auth updates the adapter.
 
-### Setup (one-time)
-1. Create a **Neon** project → copy the **pooled** connection string (keep `?sslmode=require`).
-2. `cp .env.example .env.local`, then fill `DATABASE_URL`, `BETTER_AUTH_SECRET`
-   (`openssl rand -base64 32`), `BETTER_AUTH_URL`, and `SEED_ADMIN_*`.
-3. `npm run db:migrate` (or `db:push`) → creates the tables.
-4. `npm run db:seed` → creates the first admin. Sign in at `/admin/login`.
-5. On **Vercel** set `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL` (Production).
+### Setup — ✅ DONE in production
+Neon project created; schema applied + first admin seeded (run as one SQL script in Neon's SQL
+editor, since the sandbox can't reach Neon); `DATABASE_URL`, `BETTER_AUTH_SECRET`,
+`BETTER_AUTH_URL` set on Vercel (Production); login verified live.
+- **Login:** `/admin/login`. Seeded admin = `admin@aether.studio` (a rename to
+  `marco@aether.studio` + a weak password may have been applied via SQL — confirm with the user).
+- **Change credentials** (no admin UI for it yet) → run SQL on Neon. Hash a password with Better
+  Auth scrypt: `node -e "import('better-auth/crypto').then(m=>m.hashPassword('<pw>').then(console.log))"`,
+  then `UPDATE "user" SET email=…, name=… WHERE …;` and `UPDATE account SET password='<hash>'
+  WHERE provider_id='credential' AND user_id=(SELECT id FROM "user" WHERE email=…);`.
+- To set up fresh elsewhere: `cp .env.example .env.local` → fill `DATABASE_URL` +
+  `BETTER_AUTH_SECRET` + `SEED_ADMIN_*` → `npm run db:migrate` (or `db:push`) → `npm run db:seed`.
 
 ## Env vars (Vercel)
 - `RESEND_API_KEY`, `CONTACT_TO_EMAIL` (+ optional `CONTACT_FROM_EMAIL`) — contact form email (`src/app/api/contact/route.ts`); without them it logs + returns `{ ok:true, delivered:false }`.
-- **Admin dashboard**: `DATABASE_URL` (Neon pooled, `?sslmode=require`), `BETTER_AUTH_SECRET`
-  (`openssl rand -base64 32`), `BETTER_AUTH_URL` (prod URL). `SEED_ADMIN_*` are read only once by
-  `npm run db:seed`. See `.env.example`.
+- **Admin dashboard** (✅ all three set on Vercel Production): `DATABASE_URL` (Neon pooled,
+  `?sslmode=require`), `BETTER_AUTH_SECRET` (`openssl rand -base64 32`), `BETTER_AUTH_URL` (prod URL).
+  `SEED_ADMIN_*` are read only once by `npm run db:seed`. See `.env.example`.
 
 ## Reminders
-- 🔴 **Revoke the GitHub PAT** used for pushes (it passed through chat).
-- Set `RESEND_*` to receive contact emails; set `site.domain` to the real/custom domain (drives canonical/OG).
+- 🔴 **Revoke the GitHub PAT** used for pushes (it passed through chat) once done iterating.
+- 🔴 **Harden the admin password** (a weak one may be live) + align the admin login to the official email.
+- Set **`CONTACT_TO_EMAIL`** (+ `RESEND_API_KEY`) on Vercel so the contact form also emails enquiries
+  to `info@socialwebautomation.com` (leads already persist to `/admin/leads` regardless).
+- Set `site.domain` to the real/custom domain (drives canonical/OG). Public email is now
+  `info@socialwebautomation.com` (`src/lib/content.ts` → `site.email`).
+- **Delete the stale branch** `claude/vigilant-goodall-fuIsx` (0 commits ahead of `main`).
+- Leftovers from the testimonials removal: `t.testimonials` copy still sits unused in `i18n.ts` and
+  `.mask-fade-x-wide` is now unused — harmless, tidy up if desired.
 - Validate JSON-LD (Google Rich Results) + hreflang after deploys; check Vercel Analytics/Speed Insights are enabled in the dashboard.
